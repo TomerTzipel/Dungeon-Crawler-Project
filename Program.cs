@@ -13,7 +13,7 @@ class Program
 
             if (!playerStatus) break;
         }
-
+        //dfF
         Printer.Clear();
 
         if (playerStatus)
