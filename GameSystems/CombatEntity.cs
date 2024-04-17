@@ -127,7 +127,11 @@ namespace GameSystems
         private void TakeDamage(int damage, int pierce)
         {
             int calculatedDamage = CalculateDamage(damage, pierce);
-            Debug.WriteLine(calculatedDamage.ToString());
+            if(calculatedDamage <= 0)
+            {
+                return;
+            }
+
             _hp -= calculatedDamage;
 
             if (_hp < 0) _hp = 0;

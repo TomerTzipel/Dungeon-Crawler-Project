@@ -9,6 +9,34 @@ namespace GameSystems
 
         private static readonly object _printerLock = new object();
 
+
+        public static void PrinterSetUp()
+        {
+            Console.BufferWidth = 20000;
+            Console.CursorVisible = false;
+            Clear();
+        }
+
+        public static void PrintScene(SceneType scene)
+        {
+            switch (scene)
+            {
+                case SceneType.MainMenu:
+                    PrintMainMenuScene();
+                    break;
+
+                case SceneType.Game:
+                    PrintGameScene(LevelManager.CurrentLevel);
+                    break;
+
+                case SceneType.Inventory:
+                    PrintInventoryScene();
+                    break;
+
+            }
+
+        }
+
         public static void PrintLevel()
         {
 
@@ -44,37 +72,38 @@ namespace GameSystems
             May this lock forever stop race conditions. */
         }
 
-        public static void PrintHUD()
+        public static void PrintMainMenuScene()
         {
-
+            Clear();
+            MainMenu.SetUpMainMenu();
+            MainMenu.Print();
         }
 
-        public static void PrintMiniMap()
+        public static void PrintInventoryScene()
         {
-            LevelManager.CurrentLevel.PrintMiniMap();
-            ColorReset();
+            Clear();
         }
 
-        public static void PrintStatus()
-        {
-
-        }
-
-        public static void PrintMainMenu()
-        {
-
-        }
-
-        public static void PrintInventory()
-        {
-
-        }
-
-        public static void ResetLevel(Level level)
+        public static void PrintGameScene(Level level)
         {
             Clear();
             PrintLevel();
             PrintMiniMap();
+        }
+
+        private static void PrintHUD()
+        {
+
+        }
+
+        private static void PrintMiniMap()
+        {
+            LevelManager.CurrentLevel.PrintMiniMap();
+            ColorReset();
+        }
+        public static void PrintStatus()
+        {
+
         }
 
         public static void ColorReset()

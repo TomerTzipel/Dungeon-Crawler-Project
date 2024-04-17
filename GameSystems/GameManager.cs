@@ -7,15 +7,52 @@ namespace GameSystems
 {
     public static class GameManager
     {
+        private static Thread _spawnersThread;
+        private static Thread _enemiesThread;
+        public static bool IsGamePaused { get; private set; } = true;
 
-        public static bool IsGamePaused { get; private set; } = false;
+        public static bool GameResult{ get; private set; }
 
         public static void GameSetUp() 
         {
-            Console.BufferWidth = 20000;
-            Console.CursorVisible = false;
+            if (LevelManager.IsLevelActive)
+            {
+                LevelManager.ExitLevel();
+            }
+
+            LevelManager.ResetLevelValue();
+            PlayerManager.ClearPlayer();
             PlayerManager.InitializePlayer();
-            Printer.Clear();
+        }
+
+        public static void PauseGame()
+        {
+            IsGamePaused = true;
+        }
+        public static void ResumeGame()
+        {
+            IsGamePaused = false;
+        }
+
+        public static void FinishGame(bool result)
+        {
+            SceneManager.ChangeScene(SceneType.GameOver);
+            GameResult = result;
+        }
+      
+
+        public static void StartGameThreads()
+        {
+            _spawnersThread = new Thread(new ThreadStart(SpawnerManager.Instance.Start));
+            _enemiesThread = new Thread(new ThreadStart(EnemyManager.Instance.Start));
+            _spawnersThread.Start();
+            _enemiesThread.Start();
+        }
+
+        public static void StopGameThreads()
+        {
+            _spawnersThread.Join();
+            _enemiesThread.Join();
         }
 
         //True if player is still alive, false otherwise
@@ -31,16 +68,24 @@ namespace GameSystems
 
             while (PlayerManager.PlayerElement.CombatEntity.IsAlive)
             {
-                InputType input = InputManager.ReadInput();
+                InputType input = GameInputManagerOld.ReadInput();
 
                 switch (input)
                 {
                     case InputType.Movement:
-                        InputManager.HandleMovementInput(LevelManager.CurrentLevel);
+                        GameInputManagerOld.HandleMovementInput(LevelManager.CurrentLevel);
                         break;
 
                     case InputType.Sudoku:
-                        InputManager.HandleSudokuInput(LevelManager.CurrentLevel);
+                        GameInputManagerOld.HandleSudokuInput(LevelManager.CurrentLevel);
+                        break;
+
+                    case InputType.SceneChange:
+                        GameInputManagerOld.HandleSceneChnageInput();
+                        break;
+
+                    case InputType.MenuMovement:
+                        GameInputManagerOld.HandleMenuInput();
                         break;
 
                     case InputType.Error:
@@ -66,20 +111,6 @@ namespace GameSystems
 
             return false;
 
-        }
-
-        public static void PauseGame()
-        {
-            IsGamePaused = true;
-        }
-        public static void ResumeGame()
-        {
-            IsGamePaused = false;
-        }
-
-        public static void GameOver() 
-        { 
-            IsGamePaused = true;
         }
 
     }

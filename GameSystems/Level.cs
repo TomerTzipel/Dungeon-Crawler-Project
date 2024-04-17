@@ -71,7 +71,7 @@ namespace GameSystems
         {
             Puzzle = null;
             IsPuzzleActive = false;
-            Printer.ResetLevel(this);
+            Printer.PrintGameScene(this);
             GameManager.ResumeGame();
 
         }

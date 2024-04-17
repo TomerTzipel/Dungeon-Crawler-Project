@@ -4,7 +4,19 @@ class Program
 {
     public static void Main(string[] args)
     {
-        GameManager.GameSetUp();
+        Printer.PrinterSetUp();
+
+        SceneManager.SetUpScenes();
+        SceneManager.RunGame();
+
+        //In game
+       
+
+
+
+        //load main menu
+
+        /*GameManager.GameSetUp();
         bool playerStatus = true; 
 
         for (int i = 0; i < 10; i++) 
@@ -13,7 +25,7 @@ class Program
 
             if (!playerStatus) break;
         }
-        //dfF
+        
         Printer.Clear();
 
         if (playerStatus)
@@ -25,7 +37,7 @@ class Program
         {
             //L
             Console.WriteLine("Game Over");
-        }
+        }*/
          
     }
 }

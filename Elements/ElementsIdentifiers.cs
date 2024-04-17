@@ -17,7 +17,7 @@ namespace Elements
 
         //Empty:
         public const string EMPTY_EI = "  ";
-        public const ConsoleColor OUTER_EMPTY_EBC = ConsoleColor.DarkGreen;
+        public const ConsoleColor OUTER_EMPTY_EBC = ConsoleColor.DarkBlue;
         
         //Obstacles:
         public const string VERTICAL_WALL_EI = "||";
