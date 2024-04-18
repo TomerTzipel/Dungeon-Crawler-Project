@@ -54,65 +54,6 @@ namespace GameSystems
             _spawnersThread.Join();
             _enemiesThread.Join();
         }
-
-        //True if player is still alive, false otherwise
-        public static bool GameLoop()
-        {
-            LevelManager.SetUpLevel();
- 
-            Thread spawnersThread = new Thread(new ThreadStart(SpawnerManager.Instance.Start));
-            spawnersThread.Start();
-
-            Thread enemiesThread = new Thread(new ThreadStart(EnemyManager.Instance.Start));
-            enemiesThread.Start();
-
-            while (PlayerManager.PlayerElement.CombatEntity.IsAlive)
-            {
-                InputType input = GameInputManagerOld.ReadInput();
-
-                switch (input)
-                {
-                    case InputType.Movement:
-                        GameInputManagerOld.HandleMovementInput(LevelManager.CurrentLevel);
-                        break;
-
-                    case InputType.Sudoku:
-                        GameInputManagerOld.HandleSudokuInput(LevelManager.CurrentLevel);
-                        break;
-
-                    case InputType.SceneChange:
-                        GameInputManagerOld.HandleSceneChnageInput();
-                        break;
-
-                    case InputType.MenuMovement:
-                        GameInputManagerOld.HandleMenuInput();
-                        break;
-
-                    case InputType.Error:
-                        continue;
-
-                }
-
-                if (PlayerManager.PlayerElement.DidEnterExit)
-                {
-                    break;
-                }      
-            }
-
-            SpawnerManager.Instance.Reset();
-            EnemyManager.Instance.Reset();
-
-            Printer.LoadingScreen();
-
-            spawnersThread.Join();
-            enemiesThread.Join();
-
-            if (PlayerManager.PlayerElement.CombatEntity.IsAlive) return true;
-
-            return false;
-
-        }
-
     }
 }
  

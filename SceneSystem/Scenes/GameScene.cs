@@ -11,8 +11,6 @@ namespace SceneSystem
 {
     public class GameScene : Scene
     {
-       
-
         public GameScene() : base(new GameInputManager())
         { }
 
@@ -23,19 +21,33 @@ namespace SceneSystem
                 return (GameInputManager)_inputManager; 
             }
         }
-            
+
+        protected override void EnterScene()
+        {
+            GameManager.ResumeGame();
+            SceneManager.PrintCurrentScene();
+        }
 
         public override void SceneLoop()
         {
-            if(!LevelManager.IsLevelActive)
+            if (!LevelManager.IsLevelActive)
             {
                 bool wasLevelGenerated = SetUpLevel();
-                if(!wasLevelGenerated) 
+                if (!wasLevelGenerated)
                 {
                     GameManager.FinishGame(true);
                     return;
                 }
             }
+
+            //if a puzzle is active move to puzzle scene
+            if (LevelManager.CurrentLevel.IsPuzzleActive)
+            {
+                SceneManager.ChangeScene(SceneType.Puzzle);
+                return;
+            }
+
+            EnterScene();
 
             LevelLoop();
 
@@ -69,7 +81,6 @@ namespace SceneSystem
 
         protected override void HandleInput()
         {
-            ConsoleKeyInfo input = _inputManager.LastInput;
             InputType inputType = _inputManager.LastInputType;
 
             switch (inputType)
@@ -78,47 +89,18 @@ namespace SceneSystem
                     HandleMovement();
                     break;
 
-                case InputType.Sudoku:
-                    HandleSudoku();
-                    break;
-
                 case InputType.SceneChange:
                     HandleSceneChange();
                     break;
                 default:
                     break;
             }
-
         }
 
         private void HandleMovement()
         {
             Direction direction = SceneInputManager.TranslateMovementInput();
             LevelManager.CurrentLevel.MovePlayer(PlayerManager.PlayerElement, direction);
-            Printer.PrintLevel();
-            InputManager.CleanInputBuffer();
-        }
-        private void HandleSudoku()
-        {
-            Level level = LevelManager.CurrentLevel;
-
-            if (level.IsPuzzleActive && level.Puzzle is SudokuPuzzle puzzle)
-            {
-                int value = SceneInputManager.TranslateSudokuInput();
-                if (value < 0)
-                {
-                    level.DeActivatePuzzle();
-                    return;
-                }
-
-                bool wasSolved = puzzle.InputValue(value);
-                if (wasSolved)
-                {
-                    //generate reward
-                    level.DeActivatePuzzle();
-                    return;
-                }
-            }
             Printer.PrintLevel();
             InputManager.CleanInputBuffer();
         }
@@ -130,7 +112,7 @@ namespace SceneSystem
             SceneManager.ChangeScene(scene);
 
             GameManager.PauseGame();
-
+            InputManager.CleanInputBuffer();
         }
 
         private bool SetUpLevel()
@@ -145,7 +127,6 @@ namespace SceneSystem
             GameManager.StartGameThreads();
 
             LevelManager.IsLevelActive = true;
-            GameManager.ResumeGame();
 
             return true;
         }
@@ -154,7 +135,10 @@ namespace SceneSystem
 
         public override void PrintScene()
         {
-            
+            Console.SetCursorPosition(0, 0);
+            LevelManager.CurrentLevel.PrintLevel();
+            LevelManager.CurrentLevel.PrintMiniMap();
+            Printer.ColorReset();
         }
     }
 

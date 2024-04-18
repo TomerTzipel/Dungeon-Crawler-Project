@@ -30,10 +30,6 @@ namespace Elements
             element.WalkedOnEffect(this);
             
             Background = element.Background;
-
-            
-
-           
         }
 
         public void WalkOff()

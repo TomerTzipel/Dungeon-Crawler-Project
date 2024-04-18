@@ -28,10 +28,11 @@ namespace GameSystems
             get { return CurrentLevelValue + 1; }
         }
 
-        public static void LoadRandomPuzzle(Puzzle puzzle)
+        public static void LoadRandomPuzzle()
         {
-            CurrentLevel.ActivatePuzzle(puzzle);
-            Printer.Clear();
+            Puzzle puzzle = new SudokuPuzzle();
+            CurrentLevel.ActivatePuzzle(puzzle, PuzzleType.Sudoku);
+            
         }
 
         public static bool SetUpLevel()
@@ -39,7 +40,6 @@ namespace GameSystems
             bool wasLevelGenerated = NewLevel();
             if (wasLevelGenerated)
             {
-                Printer.PrintGameScene(CurrentLevel);
                 PlayerManager.PlayerElement.DidEnterExit = false;
             }
 
@@ -59,6 +59,7 @@ namespace GameSystems
             CurrentLevel = new Level(levelSize, levelNumberOfSections, mapComposition,PlayerManager.PlayerElement);
             return true;
         }
+
         public static void ExitLevel()
         {
             SpawnerManager.Instance.Reset();

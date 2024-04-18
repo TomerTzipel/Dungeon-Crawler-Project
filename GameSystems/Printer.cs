@@ -12,27 +12,16 @@ namespace GameSystems
 
         public static void PrinterSetUp()
         {
-            Console.BufferWidth = 20000;
+            //Console.BufferWidth = 5000;
             Console.CursorVisible = false;
             Clear();
         }
 
-        public static void PrintScene(SceneType scene)
+        public static void PrintScene(Scene scene)
         {
-            switch (scene)
+            lock (_printerLock)
             {
-                case SceneType.MainMenu:
-                    PrintMainMenuScene();
-                    break;
-
-                case SceneType.Game:
-                    PrintGameScene(LevelManager.CurrentLevel);
-                    break;
-
-                case SceneType.Inventory:
-                    PrintInventoryScene();
-                    break;
-
+                scene.PrintScene();
             }
 
         }
@@ -72,39 +61,6 @@ namespace GameSystems
             May this lock forever stop race conditions. */
         }
 
-        public static void PrintMainMenuScene()
-        {
-            Clear();
-            MainMenu.SetUpMainMenu();
-            MainMenu.Print();
-        }
-
-        public static void PrintInventoryScene()
-        {
-            Clear();
-        }
-
-        public static void PrintGameScene(Level level)
-        {
-            Clear();
-            PrintLevel();
-            PrintMiniMap();
-        }
-
-        private static void PrintHUD()
-        {
-
-        }
-
-        private static void PrintMiniMap()
-        {
-            LevelManager.CurrentLevel.PrintMiniMap();
-            ColorReset();
-        }
-        public static void PrintStatus()
-        {
-
-        }
 
         public static void ColorReset()
         {
@@ -114,16 +70,26 @@ namespace GameSystems
             Console.ForegroundColor = _currentForeground;
             Console.BackgroundColor = ConsoleColor.DarkGray;
         }
+
         public static void Clear()
         {
-            ColorReset();
-            Console.Clear();
+            lock (_printerLock)
+            {
+                ColorReset();
+                Console.Clear();
+            }
+               
         }
+
         public static void LoadingScreen()
         {
-            Clear();
-            Console.WriteLine("Loading...");
+            lock (_printerLock)
+            {
+                Clear();
+                Console.WriteLine("Loading...");
+            }        
         }
+
         public static void CheckColors(Element element)
         {
             if (element.Foreground != _currentForeground)

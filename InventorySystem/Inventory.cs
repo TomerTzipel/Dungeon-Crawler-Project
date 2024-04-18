@@ -78,14 +78,15 @@ namespace InventorySystem
                 return;
             }
 
-            EquipableItems.Add(item);
-
             int typeIndex = (int)type;
 
             if (EquippedItems[typeIndex] == null)
             {
                 Equip(item);
+                return;
             }
+
+            EquipableItems.Add(item);
         }
 
         public void Equip(Item item)
@@ -101,7 +102,10 @@ namespace InventorySystem
 
             EquippedItems[typeIndex] = item;
             AddBuffs(item);
+
+            EquipableItems.Remove(item);
         }
+
         public void Unequip(ItemType type)
         {
             int typeIndex = (int)type;
@@ -110,6 +114,8 @@ namespace InventorySystem
             {
                 return;
             }
+
+            EquipableItems.Add(EquippedItems[typeIndex]);
 
             RemoveBuffs(EquippedItems[typeIndex]);
             EquippedItems[typeIndex] = null;

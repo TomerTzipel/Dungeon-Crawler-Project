@@ -22,9 +22,8 @@ namespace SceneSystem
 
         public override void SceneLoop()
         {
-            ResetScene();
-            PrintScene();
-
+            EnterScene();
+            
             while (!_wasButtonClicked)
             {
                 bool wasInputDetected = _inputManager.ReadInput();
@@ -53,7 +52,7 @@ namespace SceneSystem
             }
         }
 
-        private void ResetScene()
+        protected override void EnterScene()
         {
             foreach (var button in _buttons)
             {
@@ -63,6 +62,7 @@ namespace SceneSystem
             _wasButtonClicked = false;
             _selectedButtonIndex = 0;
             _buttons[0].Select();
+            SceneManager.PrintCurrentScene();
         }
 
         protected override void HandleInput()
@@ -96,7 +96,7 @@ namespace SceneSystem
                     break;
             }
 
-            PrintScene();
+            SceneManager.PrintCurrentScene();
         }
         private void PriorButton()
         {

@@ -11,6 +11,11 @@ namespace SceneSystem
 
         public InventoryMenuScene() : base(new InventoryMenuInputManger()) { }
 
+        protected override void EnterScene()
+        {
+            throw new NotImplementedException();
+        }
+
         public override void SceneLoop()
         {
             throw new NotImplementedException();

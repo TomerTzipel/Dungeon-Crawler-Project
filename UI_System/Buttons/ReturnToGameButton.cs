@@ -15,8 +15,6 @@ namespace UI_System
         {
             if (!LevelManager.IsLevelActive) return false;
 
-
-            GameManager.ResumeGame();
             return base.OnClick();
         }
     }

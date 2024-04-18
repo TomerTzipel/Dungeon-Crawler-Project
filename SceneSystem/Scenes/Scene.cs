@@ -15,7 +15,7 @@ namespace SceneSystem
         {
             _inputManager = inputManager;
         }
-
+        protected abstract void EnterScene();
         public abstract void SceneLoop();
 
         protected abstract void HandleInput();

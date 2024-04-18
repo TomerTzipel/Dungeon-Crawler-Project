@@ -1,5 +1,6 @@
 ﻿
 
+using SceneSystem;
 using System.Reflection.Emit;
 using Utility;
 
@@ -11,7 +12,7 @@ namespace GameSystems
         public Map Map { get; private set; }
         
         public Puzzle Puzzle { get; private set; }
-
+        public PuzzleType PuzzleType { get; private set; }
         public bool IsPuzzleActive { get; private set; } = false;
 
         public Level(int matrixSectionSize, int numberOfSections,MapComposition mapComposition, PlayerElement player)
@@ -37,11 +38,10 @@ namespace GameSystems
             if (IsPuzzleActive)
             {
                 PrintPuzzle();
+                return;
             }
-            else
-            {
-                PrintCamera();
-            }
+
+            PrintCamera();
         }
 
         public void PrintCamera()
@@ -49,36 +49,37 @@ namespace GameSystems
             Console.WriteLine();
             Map.PrintToCamera(_camera);
         }
+        public void PrintPuzzle()
+        {
+            Console.WriteLine();
+            Puzzle.PrintPuzzle();
+        }
 
         public void MovePlayer(PlayerElement player,Direction direction)
         {
-            if (IsPuzzleActive)
-            {
-                Puzzle.MoveSolverInDirection(direction);
-                return;
-            }
-
             Map.MoveElementInDirection(player, direction);
         }
 
-        public void ActivatePuzzle(Puzzle puzzle) 
+        public void MoveSolver(Direction direction)
+        {
+            Puzzle.MoveSolverInDirection(direction); 
+        }
+
+        public void ActivatePuzzle(Puzzle puzzle,PuzzleType type) 
         {
             Puzzle = puzzle;
+            PuzzleType = type;
             IsPuzzleActive = true;
+            GameManager.PauseGame();
+            SceneManager.ChangeScene(SceneType.Puzzle);
         }
 
         public void DeActivatePuzzle()
         {
             Puzzle = null;
             IsPuzzleActive = false;
-            Printer.PrintGameScene(this);
-            GameManager.ResumeGame();
-
+            SceneManager.ChangeScene(SceneType.Game);
         }
-        public void PrintPuzzle()
-        {
-            Console.WriteLine();
-            Puzzle.PrintPuzzle();
-        }
+      
     }
 }
