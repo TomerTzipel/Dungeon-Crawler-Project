@@ -12,7 +12,7 @@ namespace GameSystems
 
         public static void PrinterSetUp()
         {
-            //Console.BufferWidth = 5000;
+            Console.BufferWidth = 5000;
             Console.CursorVisible = false;
             Clear();
         }

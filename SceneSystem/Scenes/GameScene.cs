@@ -64,12 +64,7 @@ namespace SceneSystem
                    PlayerManager.PlayerElement.CombatEntity.IsAlive && 
                    !GameManager.IsGamePaused)
             {
-                bool wasInputDetected = _inputManager.ReadInput();
-
-                if (wasInputDetected)
-                {
-                    HandleInput();
-                }
+                base.SceneLoop();
 
                 if (PlayerManager.PlayerElement.DidEnterExit)
                 {
@@ -130,8 +125,6 @@ namespace SceneSystem
 
             return true;
         }
-
-       
 
         public override void PrintScene()
         {

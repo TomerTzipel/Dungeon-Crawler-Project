@@ -28,12 +28,7 @@ namespace SceneSystem
 
             while(LevelManager.CurrentLevel.IsPuzzleActive && _isCurrentScene)
             {
-                bool wasInputDetected = _inputManager.ReadInput();
-
-                if (wasInputDetected)
-                {
-                    HandleInput();
-                }
+                base.SceneLoop();
             }
 
         }

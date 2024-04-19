@@ -14,6 +14,8 @@ namespace SceneSystem
             {
                 case ConsoleKey.UpArrow:
                 case ConsoleKey.DownArrow:
+                case ConsoleKey.W:
+                case ConsoleKey.S:
                     return InputType.MenuMovement;
 
                 case ConsoleKey.Enter:

@@ -8,7 +8,7 @@ namespace UI_System
 {
     public abstract class Button
     {
-        private string _text;
+        protected string _text;
 
         private bool _isSelected = false;
 

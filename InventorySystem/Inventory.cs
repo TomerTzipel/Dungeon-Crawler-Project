@@ -13,8 +13,8 @@ namespace InventorySystem
         public int Keys { get; private set; } = 1;
         public int Gold { get; private set; } = 10;
 
-        public List<Item> EquipableItems { get; private set; } = new List<Item>(8);
-        public List<Item> Trinkets { get; private set; } = new List<Item>(8);
+        public List<Item> EquipableItems { get; private set; } = new List<Item>(20);
+        public List<Item> Trinkets { get; private set; } = new List<Item>(20);
         public Item[] EquippedItems { get; private set; } = new Item[6];
 
         private int[][] _buffsValues = [new int[6], [100,100,100,100,100,100]];
@@ -22,6 +22,32 @@ namespace InventorySystem
         public Inventory(PlayerCombatEntity combatEntity) 
         {
             _combatEntity = combatEntity;
+            GetItem(new Item("Cool Helmet",ItemType.Head,[new Buff(BuffType.Additive,StatType.Hp,10)]));
+            GetItem(new Item("Cool Chestplate", ItemType.Body, [new Buff(BuffType.Additive, StatType.Hp, 10)]));
+            GetItem(new Item("Cool Gauntlets", ItemType.Arms,[ new Buff(BuffType.Additive, StatType.Hp, 10) ]));
+            GetItem(new Item("Cool Ring", ItemType.Ring, [ new Buff(BuffType.Additive, StatType.Hp, 10) ]));
+            GetItem(new Item("Cool Leggings", ItemType.Legs, [new Buff(BuffType.Additive, StatType.Hp, 10) ]));
+            GetItem(new Item("Cool Necklace", ItemType.Necklace, [ new Buff(BuffType.Additive, StatType.Hp, 10) ]));
+
+
+            GetItem(new Item("A", ItemType.Trinket, [new Buff(BuffType.Additive, StatType.Hp, 10)]));
+            GetItem(new Item("B", ItemType.Trinket, [new Buff(BuffType.Additive, StatType.Hp, 10)]));
+            GetItem(new Item("C", ItemType.Trinket, [new Buff(BuffType.Additive, StatType.Hp, 10)]));
+            GetItem(new Item("D", ItemType.Trinket, [new Buff(BuffType.Additive, StatType.Hp, 10)]));
+            GetItem(new Item("E", ItemType.Trinket, [new Buff(BuffType.Additive, StatType.Hp, 10)]));
+            GetItem(new Item("F", ItemType.Trinket, [new Buff(BuffType.Additive, StatType.Hp, 10)]));
+            GetItem(new Item("G", ItemType.Trinket, [new Buff(BuffType.Additive, StatType.Hp, 10)]));
+            GetItem(new Item("H", ItemType.Trinket, [new Buff(BuffType.Additive, StatType.Hp, 10)]));
+            GetItem(new Item("I", ItemType.Trinket, [new Buff(BuffType.Additive, StatType.Hp, 10)]));
+            GetItem(new Item("K", ItemType.Trinket, [new Buff(BuffType.Additive, StatType.Hp, 10)]));
+            GetItem(new Item("J", ItemType.Trinket, [new Buff(BuffType.Additive, StatType.Hp, 10)]));
+            GetItem(new Item("L", ItemType.Trinket, [new Buff(BuffType.Additive, StatType.Hp, 10)]));
+            GetItem(new Item("M", ItemType.Trinket, [new Buff(BuffType.Additive, StatType.Hp, 10)]));
+            GetItem(new Item("O", ItemType.Trinket, [new Buff(BuffType.Additive, StatType.Hp, 10)]));
+            GetItem(new Item("P", ItemType.Trinket, [new Buff(BuffType.Additive, StatType.Hp, 10)]));
+            GetItem(new Item("Q", ItemType.Trinket, [new Buff(BuffType.Additive, StatType.Hp, 10)]));
+
+      
         }
 
         public bool HasKey
@@ -101,6 +127,7 @@ namespace InventorySystem
             }
 
             EquippedItems[typeIndex] = item;
+            item.Equip();
             AddBuffs(item);
 
             EquipableItems.Remove(item);
@@ -109,15 +136,17 @@ namespace InventorySystem
         public void Unequip(ItemType type)
         {
             int typeIndex = (int)type;
+            Item item = EquippedItems[typeIndex];
 
-            if(EquippedItems[typeIndex] == null)
+            if (EquippedItems[typeIndex] == null)
             {
                 return;
             }
 
-            EquipableItems.Add(EquippedItems[typeIndex]);
+            EquipableItems.Add(item);
+            item.Unequip();
+            RemoveBuffs(item);
 
-            RemoveBuffs(EquippedItems[typeIndex]);
             EquippedItems[typeIndex] = null;
             
         }
@@ -136,7 +165,7 @@ namespace InventorySystem
 
                 if(buff.StatType == StatType.Hp)
                 {
-                    GainHpBuff(buff.value);
+                    GainHpBuff(buff.Value);
                     continue;
                 }
 
@@ -147,11 +176,11 @@ namespace InventorySystem
 
                 if(type == BuffType.Additive)
                 {
-                    _buffsValues[buffTypeIndex][statTypeIndex] += buff.value;
+                    _buffsValues[buffTypeIndex][statTypeIndex] += buff.Value;
                 }
                 else
                 {
-                    float buffValue = buff.value/100f;
+                    float buffValue = buff.Value/100f;
 
                     float currentValue = _buffsValues[buffTypeIndex][statTypeIndex];
 
@@ -170,7 +199,7 @@ namespace InventorySystem
             {
                 if (buff.StatType == StatType.Hp)
                 {
-                    LoseHpBuff(buff.value);
+                    LoseHpBuff(buff.Value);
                     continue;
                 }
 
@@ -181,11 +210,11 @@ namespace InventorySystem
 
                 if (type == BuffType.Additive)
                 {
-                    _buffsValues[buffTypeIndex][statTypeIndex] -= buff.value;
+                    _buffsValues[buffTypeIndex][statTypeIndex] -= buff.Value;
                 }
                 else
                 {
-                    float buffValue = buff.value / 100f;
+                    float buffValue = buff.Value / 100f;
 
                     float currentValue = _buffsValues[buffTypeIndex][statTypeIndex];
 

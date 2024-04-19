@@ -36,15 +36,19 @@ namespace SceneSystem
             switch (LastInput.Key)
             {
                 case ConsoleKey.UpArrow:
+                case ConsoleKey.W:
                     return Direction.Up;
 
                 case ConsoleKey.DownArrow:
+                case ConsoleKey.S:
                     return Direction.Down;
 
                 case ConsoleKey.LeftArrow:
+                case ConsoleKey.A:
                     return Direction.Left;
 
                 case ConsoleKey.RightArrow:
+                case ConsoleKey.D:
                     return Direction.Right;
 
                 default:

@@ -26,11 +26,7 @@ namespace SceneSystem
             
             while (!_wasButtonClicked)
             {
-                bool wasInputDetected = _inputManager.ReadInput();
-                if (wasInputDetected)
-                {
-                    HandleInput();
-                }
+                base.SceneLoop();
             }
         }
 
@@ -89,9 +85,11 @@ namespace SceneSystem
             switch (inputKey)
             {
                 case ConsoleKey.UpArrow:
+                case ConsoleKey.W:
                     PriorButton();
                     break;
                 case ConsoleKey.DownArrow:
+                case ConsoleKey.S:
                     NextButton();
                     break;
             }

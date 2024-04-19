@@ -16,7 +16,15 @@ namespace SceneSystem
             _inputManager = inputManager;
         }
         protected abstract void EnterScene();
-        public abstract void SceneLoop();
+        public virtual void SceneLoop()
+        {
+            bool wasInputDetected = _inputManager.ReadInput();
+
+            if (wasInputDetected)
+            {
+                HandleInput();
+            }
+        }
 
         protected abstract void HandleInput();
 
