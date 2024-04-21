@@ -107,7 +107,6 @@ namespace MapSystems
 
         public void PrintMiniMap()
         {
-            Console.WriteLine();
             _sectionsMatrix.Print();
         }
        

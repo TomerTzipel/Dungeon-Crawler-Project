@@ -27,7 +27,7 @@ namespace Elements
                 if (wasPlayerHit)
                 {
                     player.Stun(_stunDuration);
-                    Debug.WriteLine("Stunned");
+                    Printer.AddActionText(ActionTextType.Stun, $"The ogre stunned you! Shake yourself!");
                 }
                 
                 if (!player.CombatEntity.IsAlive)
@@ -37,6 +37,11 @@ namespace Elements
             }
 
             return false;
+        }
+
+        protected override void WriteDeathActionText()
+        {
+            Printer.AddActionText(ActionTextType.CombatPositive,"You killed an ogre!");
         }
     }
 }

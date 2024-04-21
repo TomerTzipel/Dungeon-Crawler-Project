@@ -20,6 +20,7 @@ namespace GameSystems
                 LevelManager.ExitLevel();
             }
 
+            Printer.ResetActionTextPrinter();
             LevelManager.ResetLevelValue();
             PlayerManager.ClearPlayer();
             PlayerManager.InitializePlayer();

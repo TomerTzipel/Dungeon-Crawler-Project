@@ -74,6 +74,7 @@ namespace InventorySystem
             {
                 Console.WriteLine(buff);
                 Console.SetCursorPosition(cursorColumn, cursorRow + 1);
+                //Printer.SetPrinterPosition(cursorColumn, cursorRow + 1);
             }
         }
 

@@ -70,15 +70,15 @@ namespace GameSystems
             _armor = armor;
             _pierce = pierce;
         }
+
         public bool Attack(CombatEntity defender)
         {
             bool wasDefenderHit = false;
 
             AttackResult result = SingularAttack(defender);
-            Debug.WriteLine(result.ToString());
-            //Update Game Status screen
+            WriteActionText(result);
 
-            if(result == AttackResult.Hit)
+            if (result == AttackResult.Hit)
             {
                 wasDefenderHit = true;
             }
@@ -92,8 +92,7 @@ namespace GameSystems
                 if (RollChance(multihit))
                 {
                     result = SingularAttack(defender);
-                    Debug.WriteLine(result.ToString());
-                    //Update Game Status screen
+                    WriteActionText(result);
 
                     if (!wasDefenderHit && result == AttackResult.Hit)
                     {
@@ -110,7 +109,8 @@ namespace GameSystems
         }
         private AttackResult SingularAttack(CombatEntity defender)
         {
-            if(!RollChance(Accuracy))
+
+            if (!RollChance(Accuracy))
             {
                 return AttackResult.Missed;
             }
@@ -120,21 +120,23 @@ namespace GameSystems
                 return AttackResult.Dodged;
             }
 
-            defender.TakeDamage(Damage,Pierce);
+            int damageTaken = defender.TakeDamage(Damage,Pierce);
             return AttackResult.Hit;
         }
 
-        private void TakeDamage(int damage, int pierce)
+        protected virtual int TakeDamage(int damage, int pierce)
         {
             int calculatedDamage = CalculateDamage(damage, pierce);
             if(calculatedDamage <= 0)
             {
-                return;
+                return 0;
             }
 
             _hp -= calculatedDamage;
 
             if (_hp < 0) _hp = 0;
+
+            return calculatedDamage;
         }
 
         private int CalculateDamage(int damage,int pierce)
@@ -142,10 +144,30 @@ namespace GameSystems
             return damage - (int)(Armor * ((100 - pierce)/100f));
         }
 
-        public void LoseHpByMaxHpPrecentage(int precentage) 
-        { 
-            float damage = (_maxHp * precentage) / 100f;
-            TakeDamage((int)damage,100);
+        protected virtual void WriteActionText(AttackResult result)
+        {
+            string text = "";
+            ActionTextType type = ActionTextType.General;
+            switch (result)
+            {
+                case AttackResult.Missed:
+                    text = "The enemy attack missed!";
+                    type = ActionTextType.CombatPositive;
+                    break;
+
+                case AttackResult.Dodged:
+                    text = "You dodged an attack!";
+                    type = ActionTextType.CombatPositive;
+                    break;
+
+                case AttackResult.Hit:
+                    text = "You were hit!";
+                    type = ActionTextType.CombatNegative;
+                    break;
+            }
+
+            Printer.AddActionText(type,text);
+
         }
     }
 }

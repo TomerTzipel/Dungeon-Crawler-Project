@@ -13,9 +13,8 @@ namespace Elements
 
             if (element is PlayerElement player)
             {
-                if (player.Inventory.HasKey)
+                if (player.Inventory.UseKey())
                 {
-                    player.Inventory.UseKey();
                     Destroyed();
                     return false;
                 }

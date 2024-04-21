@@ -321,6 +321,8 @@ namespace MapSystems
 
         public void Print()
         {
+            Console.SetCursorPosition((Printer.CAMERA_WIDTH * 2) + 1, 0);
+            //Printer.SetPrinterPosition((Printer.CAMERA_WIDTH * 2) + 1, 5);
             for (int i = 0; i < _size; i++)
             {
                 for (int j = 0; j < _size; j++)
@@ -358,7 +360,8 @@ namespace MapSystems
                     Console.Write($"  ");
 
                 }
-                Console.WriteLine();
+                Console.SetCursorPosition((Printer.CAMERA_WIDTH * 2) + 1,  i + 1);
+                //Printer.SetPrinterPosition((Printer.CAMERA_WIDTH * 2) + 1, 5 + i);
             }
         }
 

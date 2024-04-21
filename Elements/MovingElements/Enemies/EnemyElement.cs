@@ -5,7 +5,7 @@ using Utility;
 
 namespace Elements
 {
-    public class EnemyElement : MovingElement, ITickable
+    public abstract class EnemyElement : MovingElement, ITickable
     {
 
         protected float _movementSpeed;
@@ -126,7 +126,7 @@ namespace Elements
         protected virtual void Die(Map map)
         {
             EnemyManager.Instance.RemoveEnemy(this);
-
+            WriteDeathActionText();
             if (IsOnWalkableElement)
             {
                 WalkableElementOnTopOf.TurnBloody();
@@ -157,6 +157,11 @@ namespace Elements
         {
             return Point.Distance(Position, PlayerManager.PlayerElement.Position);
         }
+
+        protected abstract void WriteDeathActionText();
+
+
+
 
     }
 }

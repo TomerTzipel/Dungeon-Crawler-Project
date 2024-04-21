@@ -128,10 +128,19 @@ namespace SceneSystem
 
         public override void PrintScene()
         {
-            Console.SetCursorPosition(0, 0);
+            LevelManager.CurrentLevel.PrintHUD();
+            Printer.ColorReset();
+      
             LevelManager.CurrentLevel.PrintLevel();
+            Printer.ColorReset();
+
+
+            Printer.PrintActionText();
+            Printer.ColorReset();
+            
             LevelManager.CurrentLevel.PrintMiniMap();
             Printer.ColorReset();
+
         }
     }
 

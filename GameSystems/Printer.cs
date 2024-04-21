@@ -1,5 +1,7 @@
 ﻿
 
+using System.Data;
+
 namespace GameSystems
 {
     public static class Printer
@@ -7,12 +9,21 @@ namespace GameSystems
         public static ConsoleColor _currentForeground = DEFAULT_EFC;
         public static ConsoleColor _currentBackground = DEFAULT_EBC;
 
+        public const int CAMERA_WIDTH = 21;
+        public const int CAMERA_HEIGHT = 13;
+
+        public static readonly Point PRINTER_PIVOT = new Point(0, 0);
+
         private static readonly object _printerLock = new object();
 
 
+        private const int ACTION_TEXT_MAX_LINES = 10;
+        private static ActionTextPrinter _actionTextPrinter;
+
         public static void PrinterSetUp()
         {
-            Console.BufferWidth = 5000;
+            //Console.BufferWidth = 5000;
+            ResetActionTextPrinter();
             Console.CursorVisible = false;
             Clear();
         }
@@ -21,6 +32,8 @@ namespace GameSystems
         {
             lock (_printerLock)
             {
+                //SetPrinterPosition();
+                Console.SetCursorPosition(0, 0);
                 scene.PrintScene();
             }
 
@@ -31,8 +44,14 @@ namespace GameSystems
 
             lock (_printerLock)
             {
+                //SetPrinterPosition();
                 Console.SetCursorPosition(0, 0);
                 LevelManager.CurrentLevel.PrintLevel();
+
+                if (PlayerManager.PlayerElement.CombatEntity.DoesHUDNeedReprint) PrintHUD();
+
+                if (_actionTextPrinter.DoesNeedReprint) PrintActionText();
+
             }
 
             /* I wrote my own lock and then found out the lock keyword exists. Felt bad deleting it, so I left a memorial.
@@ -61,6 +80,34 @@ namespace GameSystems
             May this lock forever stop race conditions. */
         }
 
+        public static void PrintHUD()
+        {
+            lock (_printerLock)
+            {
+                //SetPrinterPosition();
+                Console.SetCursorPosition(0, 0); 
+                ColorReset();
+                LevelManager.CurrentLevel.PrintHUD();
+            }
+
+        }
+        public static void PrintActionText()
+        {
+            lock (_printerLock)
+            {
+                //SetPrinterPosition();
+                Console.SetCursorPosition(0, 5 + CAMERA_HEIGHT + 1);
+                ColorReset();
+                _actionTextPrinter.Print();
+                ColorReset(); 
+            }
+        }
+
+        public static void AddActionText(ActionTextType type,string text)
+        {
+            ActionText line = new ActionText(type, text);
+            _actionTextPrinter.AddLine(line);
+        }
 
         public static void ColorReset()
         {
@@ -68,7 +115,7 @@ namespace GameSystems
             _currentForeground = DEFAULT_EFC;
             _currentBackground = ConsoleColor.DarkGray;
             Console.ForegroundColor = _currentForeground;
-            Console.BackgroundColor = ConsoleColor.DarkGray;
+            Console.BackgroundColor = _currentBackground;
         }
 
         public static void Clear()
@@ -104,7 +151,20 @@ namespace GameSystems
             }
         }
 
-      
+        public static void SetPrinterPosition()
+        {
+            SetPrinterPosition(0,0);
+        }
+
+        public static void SetPrinterPosition(int row, int column)
+        {
+            Console.SetCursorPosition(PRINTER_PIVOT.X + column, PRINTER_PIVOT.Y + row);
+        }
+
+        public static void ResetActionTextPrinter()
+        {
+            _actionTextPrinter = new ActionTextPrinter(ACTION_TEXT_MAX_LINES);
+        }
     }
 
 }

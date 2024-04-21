@@ -44,6 +44,7 @@ namespace UI_System {
             if (_item == null) return;
 
             Console.SetCursorPosition(cursorColumn, cursorRow + 1);
+            //Printer.SetPrinterPosition(cursorColumn, cursorRow + 1);
             _item.PrintBuffs();
         }
 

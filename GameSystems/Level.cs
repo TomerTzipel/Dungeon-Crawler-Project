@@ -18,7 +18,7 @@ namespace GameSystems
         public Level(int matrixSectionSize, int numberOfSections,MapComposition mapComposition, PlayerElement player)
         {
             GenerateMapLayout(numberOfSections, matrixSectionSize, mapComposition, player);
-            _camera = new Camera(21,13);
+            _camera = new Camera(Printer.CAMERA_WIDTH, Printer.CAMERA_HEIGHT);
         }
 
         private void GenerateMapLayout(int numberOfSectionsToGenerate, int matrixSectionSize, MapComposition mapComposition, PlayerElement player)
@@ -27,11 +27,7 @@ namespace GameSystems
            
         }
 
-        public void PrintMiniMap()
-        {
-            Console.WriteLine();
-            Map.PrintMiniMap();
-        }
+       
 
         public void PrintLevel()
         {
@@ -46,14 +42,25 @@ namespace GameSystems
 
         public void PrintCamera()
         {
-            Console.WriteLine();
+            //Printer.SetPrinterPosition(0, 5);
+            Console.SetCursorPosition(0, 5);
             Map.PrintToCamera(_camera);
         }
+
         public void PrintPuzzle()
         {
-            Console.WriteLine();
             Puzzle.PrintPuzzle();
         }
+        public void PrintMiniMap()
+        {
+            Map.PrintMiniMap();
+        }
+
+        public void PrintHUD()
+        {
+            PlayerManager.PlayerElement.CombatEntity.PrintPlayerStatus();
+        }
+
 
         public void MovePlayer(PlayerElement player,Direction direction)
         {

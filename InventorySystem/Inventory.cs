@@ -12,6 +12,8 @@ namespace InventorySystem
 
         public int Keys { get; private set; } = 1;
         public int Gold { get; private set; } = 10;
+        public int Potions { get; private set; } = 0;
+
 
         public List<Item> EquipableItems { get; private set; } = new List<Item>(20);
         public List<Item> Trinkets { get; private set; } = new List<Item>(20);
@@ -50,23 +52,44 @@ namespace InventorySystem
       
         }
 
-        public bool HasKey
-        {
-            get { return Keys > 0; }
-        }
-
         public void GainKeys(int amount)
         {
             Keys += amount;
+            _combatEntity.DoesHUDNeedReprint = true;
         }
-        public void UseKey()
+        public void GainPotions(int amount)
         {
-            Keys--;
+            Potions += amount;
+            _combatEntity.DoesHUDNeedReprint = true;
         }
 
         public void GainGold(int amount)
         {
             Gold += amount;
+            _combatEntity.DoesHUDNeedReprint = true;
+        }
+
+        public bool UseKey()
+        {
+            if(Keys == 0)
+            {
+                return false;
+            }
+
+            Keys--;
+            _combatEntity.DoesHUDNeedReprint = true;
+            return true;
+        }
+
+        public bool UsePotion()
+        {
+            if (Potions == 0)
+            {
+                return false;
+            }
+            Potions--;
+            _combatEntity.DoesHUDNeedReprint = true;
+            return true;
         }
 
         public bool SpendGold(int amount)
@@ -91,6 +114,7 @@ namespace InventorySystem
             {
                 Gold = 0;
             }
+            _combatEntity.DoesHUDNeedReprint = true;
         }
 
         public void GetItem(Item item)

@@ -1,4 +1,6 @@
 ﻿
+using static System.Net.Mime.MediaTypeNames;
+
 namespace Elements
 {
     public class QuicksandTrapElement : TrapElement
@@ -12,6 +14,7 @@ namespace Elements
         protected override void TrapEffect(PlayerElement element) 
         {
             element.Stun(10);
+            Printer.AddActionText(ActionTextType.Stun, $"YOU FELL INTO QUICKSAND! WIGGLE OUT OF IT!");
         }
 
        

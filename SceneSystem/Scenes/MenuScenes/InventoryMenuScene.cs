@@ -147,8 +147,6 @@ namespace SceneSystem
 
         public override void PrintScene()
         {
-            Console.SetCursorPosition(0, 0);
-            
             Console.ForegroundColor = _titlesColor;
             Console.WriteLine("Equipped Items:");
             Printer.ColorReset();
@@ -183,8 +181,8 @@ namespace SceneSystem
                 Printer.ColorReset();
 
                 cursorColumn += 25;
-                
                 Console.SetCursorPosition(cursorColumn, cursorRow);
+               //Printer.SetPrinterPosition(cursorColumn, cursorRow);
             }
         }
         private void PrintEquipableItemsShowcase()
@@ -208,6 +206,7 @@ namespace SceneSystem
 
                     cursorColumn += 25;
                     Console.SetCursorPosition(cursorColumn, cursorRow);
+                    //Printer.SetPrinterPosition(cursorColumn, cursorRow);
                 }
                 cursorColumn = 0;
                 Console.WriteLine(); Console.WriteLine(); Console.WriteLine();
@@ -228,10 +227,12 @@ namespace SceneSystem
                 Console.WriteLine(trinket);
 
                 Console.SetCursorPosition(cursorColumn, cursorRow + 1);
+                //Printer.SetPrinterPosition(cursorColumn, cursorRow + 1);
                 trinket.PrintBuffs();
 
                 cursorColumn += 25;
                 Console.SetCursorPosition(cursorColumn, cursorRow);
+                //Printer.SetPrinterPosition(cursorColumn, cursorRow);
 
                 count++;
 

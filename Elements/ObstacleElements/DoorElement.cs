@@ -14,12 +14,7 @@ namespace Elements
             {
                 if (!_isOpened)
                 {
-                    if (player.Inventory.HasKey)
-                    {
-                        player.Inventory.UseKey();
-                        _isOpened = true;
-                    }
-                   
+                    _isOpened = player.Inventory.UseKey();
                 }
             }
 

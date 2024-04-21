@@ -93,6 +93,10 @@ namespace Elements
             }
 
         }
+        protected override void WriteDeathActionText()
+        {
+            Printer.AddActionText(ActionTextType.CombatPositive, "You killed a slime!");
+        }
 
     }
 }

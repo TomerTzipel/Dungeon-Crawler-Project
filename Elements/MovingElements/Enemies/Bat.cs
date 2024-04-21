@@ -39,6 +39,11 @@ namespace Elements
                 Identifier = BAT_UP_EI;
                 isUpState = true;
             }
+        } 
+
+        protected override void WriteDeathActionText()
+        {
+            Printer.AddActionText(ActionTextType.CombatPositive, "You killed a bat!");
         }
     }
 }

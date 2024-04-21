@@ -97,7 +97,7 @@ namespace SceneSystem
 
         public override void PrintScene()
         {
-            Console.SetCursorPosition(0, 0);
+           
             LevelManager.CurrentLevel.PrintLevel();
             Printer.ColorReset();
         }

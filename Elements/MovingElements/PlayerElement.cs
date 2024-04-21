@@ -62,7 +62,8 @@ namespace Elements
 
         public void LoseHpByMaxHpPrecentage(int precentage)
         {
-            CombatEntity.LoseHpByMaxHpPrecentage(precentage);
+            int damage = CombatEntity.LoseHpByMaxHpPrecentage(precentage);
+            Printer.AddActionText(ActionTextType.CombatNegative, $"YOU STEPPED ON SPIKES! YOU LOST {damage} HP");
         }
 
         
