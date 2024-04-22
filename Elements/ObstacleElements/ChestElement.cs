@@ -26,7 +26,8 @@ namespace Elements
 
         protected override void Destroyed()
         {
-            //reward drop  
+            Printer.AddActionText(ActionTextType.Item, "The chest contained:");
+            LootManager.RewardEquipment();
         }
     }
 }

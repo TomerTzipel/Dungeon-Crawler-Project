@@ -76,7 +76,8 @@ namespace SceneSystem
             bool wasSolved = puzzle.InputValue(value);
             if (wasSolved)
             {
-                //generate reward for player
+                Printer.AddActionText(ActionTextType.Item,"A reward for solving the sudoku:");
+                LootManager.RewardTrinket();
                 level.DeActivatePuzzle();
                 return;
             }

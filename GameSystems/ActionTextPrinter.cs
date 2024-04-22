@@ -37,10 +37,10 @@ namespace GameSystems
                     Console.ForegroundColor = ConsoleColor.DarkMagenta;
                     break;
                 case ActionTextType.CombatPositive:
-                    Console.ForegroundColor = ConsoleColor.DarkGreen;
+                    Console.ForegroundColor = ConsoleColor.Green;
                     break;
                 case ActionTextType.Item:
-                    Console.ForegroundColor = ConsoleColor.DarkCyan;
+                    Console.ForegroundColor = ConsoleColor.Cyan;
                     break;
                 case ActionTextType.Loot:
                     Console.ForegroundColor = ConsoleColor.DarkYellow;

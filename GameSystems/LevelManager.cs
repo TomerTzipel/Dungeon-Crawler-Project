@@ -2,6 +2,12 @@
 
 namespace GameSystems
 {
+
+    public enum Difficulty
+    {
+        Easy, Medium, Hard
+    }
+
     public static class LevelManager
     {
         public static Level CurrentLevel { get; private set; }
@@ -26,6 +32,27 @@ namespace GameSystems
         public static int CurrentLevelNumber
         {
             get { return CurrentLevelValue + 1; }
+        }
+
+        public static Difficulty CurrentDifficulty
+        {
+            get 
+            {
+                switch (CurrentLevelNumber)
+                {
+                    case 1:
+                    case 2:
+                    case 3:
+                        return Difficulty.Easy;
+                    case 4:
+                    case 5:
+                    case 6:
+                    case 7:
+                        return Difficulty.Medium;
+                }
+
+                return Difficulty.Hard;
+            }
         }
 
         public static void LoadRandomPuzzle()
@@ -77,5 +104,8 @@ namespace GameSystems
         {
             CurrentLevelValue = -1;
         }
+
+  
+
     }
 }

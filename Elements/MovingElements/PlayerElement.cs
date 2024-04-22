@@ -14,7 +14,7 @@ namespace Elements
 
         public PlayerElement(Point position) : base(position, PLAYER_RIGHT_EI )
         {
-            CombatEntity = new PlayerCombatEntity(10000, 30, 20, 100, 10,5,10);
+            CombatEntity = new PlayerCombatEntity(1000, 30, 20, 100, 10,5,10);
             IsOnWalkableElement = true;
         }
 

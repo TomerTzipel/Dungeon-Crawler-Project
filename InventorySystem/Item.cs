@@ -35,10 +35,10 @@ namespace InventorySystem
         {
             if(Type == BuffType.Additive)
             {
-                return $"{Type},{Value},{StatType}";
+                return $"A,{Value},{StatType}";
             }
 
-            return $"{Type},{Value/100f},{StatType}";
+            return $"M,{Value/100f},{StatType}";
         }
     }
 
@@ -70,10 +70,11 @@ namespace InventorySystem
         {
             int cursorRow = Console.CursorTop, cursorColumn = Console.CursorLeft;
 
-            foreach (Buff buff in Buffs)
+            for (int i = 0; i < Buffs.Count; i++)
             {
+                Buff buff = Buffs[i];
                 Console.WriteLine(buff);
-                Console.SetCursorPosition(cursorColumn, cursorRow + 1);
+                Console.SetCursorPosition(cursorColumn, cursorRow + i + 1);
                 //Printer.SetPrinterPosition(cursorColumn, cursorRow + 1);
             }
         }

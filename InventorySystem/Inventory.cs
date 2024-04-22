@@ -18,7 +18,7 @@ namespace InventorySystem
         public List<Item> EquipableItems { get; private set; } = new List<Item>(20);
         public List<Item> Trinkets { get; private set; } = new List<Item>(20);
         public Item[] EquippedItems { get; private set; } = new Item[6];
-
+                                    //Additive Buffs   Multiplicative Buffs
         private int[][] _buffsValues = [new int[6], [100,100,100,100,100,100]];
 
         public Inventory(PlayerCombatEntity combatEntity) 

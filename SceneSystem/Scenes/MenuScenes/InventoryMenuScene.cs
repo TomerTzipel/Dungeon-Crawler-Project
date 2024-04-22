@@ -152,8 +152,8 @@ namespace SceneSystem
             Printer.ColorReset();
             Console.WriteLine();
             PrintEquippedItemsShowcase();
+            Console.WriteLine(); Console.WriteLine();
             Console.WriteLine(); Console.WriteLine(); Console.WriteLine();
-
 
             Console.ForegroundColor = _titlesColor;
             Console.WriteLine("Equipable Items:");
@@ -209,6 +209,7 @@ namespace SceneSystem
                     //Printer.SetPrinterPosition(cursorColumn, cursorRow);
                 }
                 cursorColumn = 0;
+                Console.WriteLine(); Console.WriteLine();
                 Console.WriteLine(); Console.WriteLine(); Console.WriteLine();
                 cursorRow = Console.CursorTop;
             }
@@ -239,6 +240,7 @@ namespace SceneSystem
                 if(count != 0 && count % 6 == 0)
                 {
                     cursorColumn = 0;
+                    Console.WriteLine(); Console.WriteLine();
                     Console.WriteLine(); Console.WriteLine(); Console.WriteLine();
                     cursorRow = Console.CursorTop;
                 }

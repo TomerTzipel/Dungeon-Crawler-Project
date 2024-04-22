@@ -24,6 +24,8 @@ namespace GameSystems
         private static readonly int[] _bushLootTable =    [85,       10,     0,      4,       1];
         private static readonly int[] _boulderLootTable = [85,        4,     10,     0,       1];
 
+        private static readonly int[] _testingLootTable = [0, 0, 0, 0, 100];
+
         private static Dictionary<LootOrigin, int[]> _lootTable = new Dictionary<LootOrigin, int[]>(6);
 
         private static string _lootActionText = "";
@@ -79,7 +81,7 @@ namespace GameSystems
                     RewardPotion();
                     break;
                 case LootType.Item:
-                    RewardItem();
+                    RewardRandomItem();
                     break;
             }
         }
@@ -141,20 +143,30 @@ namespace GameSystems
             _lootActionText = "";
         }
 
-        private static void RewardItem()
+        public static void RewardRandomItem()
         {
-            //Change to randomly generated item
-            Item item = new Item("A", ItemType.Trinket, [new Buff(BuffType.Additive, StatType.Hp, 10)]);
+            Item item = ItemGenerator.GenerateRandomItem();
+            RewardItem(item);
+        }
+
+        public static void RewardTrinket()
+        {
+            Item item = ItemGenerator.GenerateTrinket();
+            RewardItem(item);
+        }
+        public static void RewardEquipment()
+        {
+            Item item = ItemGenerator.GenerateEquipment();
+            RewardItem(item);
+        }
+
+        private static void RewardItem(Item item)
+        {
             PlayerManager.PlayerElement.CombatEntity.Inventory.AddItem(item);
 
             _lootActionText += item.ToString();
-            Printer.AddActionText(ActionTextType.Loot, _lootActionText);
+            Printer.AddActionText(ActionTextType.Item, _lootActionText);
             _lootActionText = "";
-        }
-
-        public static void RewardItemByType(ItemType type)
-        {
-
         }
     }
 }

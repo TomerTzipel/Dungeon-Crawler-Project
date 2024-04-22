@@ -9,7 +9,8 @@ namespace Elements
         {
             if(element is PlayerElement player)
             {
-                //Add a check for Exit Key in Inventory
+                Printer.AddActionText(ActionTextType.Item, "A reward for finishing the level:");
+                LootManager.RewardRandomItem();
                 player.DidEnterExit = true;
             }
         }

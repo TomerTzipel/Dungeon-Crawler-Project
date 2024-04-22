@@ -16,13 +16,13 @@ namespace Utility
     public static class EnemiesLibrary
     {
 
-        private static readonly EnemyType[][] _easyEnemies = [  [EnemyType.Bat,EnemyType.Bat,EnemyType.Bat],
+        private static readonly EnemyType[][] _easyEncounter = [  [EnemyType.Bat,EnemyType.Bat,EnemyType.Bat],
                                                                 [EnemyType.Ogre],
                                                                 [EnemyType.Slime]];
 
-        private static readonly EnemyType[][] _mediumEnemies = [[EnemyType.Bat, EnemyType.Bat, EnemyType.Bat]];
+        private static readonly EnemyType[][] _mediumEncounter = [[EnemyType.Bat, EnemyType.Bat, EnemyType.Bat]];
 
-        private static readonly EnemyType[][] _hardEnemies = [[EnemyType.Bat, EnemyType.Bat, EnemyType.Bat]];
+        private static readonly EnemyType[][] _hardEncounter = [[EnemyType.Bat, EnemyType.Bat, EnemyType.Bat]];
 
         public static readonly EnemyType[][] MOUNTAIN_ENEMIES = [[EnemyType.Ogre],[]];
 
@@ -83,42 +83,26 @@ namespace Utility
 
         public static EnemyType[] GetEnemiesByCurrentLevel()
         {
-            switch (LevelManager.CurrentLevelNumber)
-            {
-                case 1: 
-                case 2:   
-                case 3:
-                    return PullEnemiesByDifficulty(1);
-                case 4:
-                case 5:
-                case 6:
-                case 7:
-                    return PullEnemiesByDifficulty(2);
-                case 8:
-                case 9:
-                case 10:
-                    return PullEnemiesByDifficulty(3);
-            }
-
-            return null;
+            Difficulty difficulty = LevelManager.CurrentDifficulty;
+            return PullEnemiesByDifficulty(difficulty);
         }
 
-        private static EnemyType[] PullEnemiesByDifficulty(int difficulty)
+        private static EnemyType[] PullEnemiesByDifficulty(Difficulty difficulty)
         {
             int chosenEnemies;
             switch (difficulty)
             {
-                case 1:
-                    chosenEnemies = RandomIndex(_easyEnemies.Length);
-                    return _easyEnemies[chosenEnemies];
+                case Difficulty.Easy:
+                    chosenEnemies = RandomIndex(_easyEncounter.Length);
+                    return _easyEncounter[chosenEnemies];
 
-                case 2:
-                    chosenEnemies = RandomIndex(_mediumEnemies.Length);
-                    return _mediumEnemies[chosenEnemies];
+                case Difficulty.Medium:
+                    chosenEnemies = RandomIndex(_mediumEncounter.Length);
+                    return _mediumEncounter[chosenEnemies];
 
-                case 3:
-                    chosenEnemies = RandomIndex(_hardEnemies.Length);
-                    return _hardEnemies[chosenEnemies];
+                case Difficulty.Hard:
+                    chosenEnemies = RandomIndex(_hardEncounter.Length);
+                    return _hardEncounter[chosenEnemies];
             }
 
             return null;
