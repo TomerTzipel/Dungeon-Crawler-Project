@@ -11,7 +11,7 @@ namespace Elements
 
         protected override void Destroyed()
         {
-            //reward drop  
+            LootManager.GenerateLoot(LootOrigin.Vase);
         }
     }
 }

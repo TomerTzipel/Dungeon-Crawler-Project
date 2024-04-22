@@ -305,7 +305,7 @@ namespace MapSystems
                         break;
 
                     case DecorationType.Bush:
-                        element = new DestroyableElement(BUSH_EI, 5, BUSH_EFC);
+                        element = new BushElement();
                         break;
 
                     case DecorationType.VWall:

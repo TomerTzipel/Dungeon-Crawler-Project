@@ -10,7 +10,7 @@ namespace GameSystems
 
     public enum ActionTextType
     {
-        CombatNegative, CombatPositive, Item, Gold, Stun, General
+        CombatNegative, CombatPositive, Item, Loot, Stun, General
     }
 
     public struct ActionText
@@ -42,7 +42,7 @@ namespace GameSystems
                 case ActionTextType.Item:
                     Console.ForegroundColor = ConsoleColor.DarkCyan;
                     break;
-                case ActionTextType.Gold:
+                case ActionTextType.Loot:
                     Console.ForegroundColor = ConsoleColor.DarkYellow;
                     break;
             }

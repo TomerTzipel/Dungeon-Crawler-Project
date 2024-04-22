@@ -20,7 +20,7 @@ namespace GameSystems
         private const int ACTION_TEXT_MAX_LINES = 10;
         private static ActionTextPrinter _actionTextPrinter;
 
-        public static void PrinterSetUp()
+        public static void SetUp()
         {
             //Console.BufferWidth = 5000;
             ResetActionTextPrinter();

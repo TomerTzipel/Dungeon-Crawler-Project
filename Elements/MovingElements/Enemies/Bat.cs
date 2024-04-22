@@ -39,7 +39,12 @@ namespace Elements
                 Identifier = BAT_UP_EI;
                 isUpState = true;
             }
-        } 
+        }
+        protected override void Die(Map map)
+        {
+            base.Die(map);
+            LootManager.GenerateLoot(LootOrigin.Bat);
+        }
 
         protected override void WriteDeathActionText()
         {

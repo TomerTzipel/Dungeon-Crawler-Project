@@ -15,7 +15,7 @@ namespace SceneSystem
         private static SceneType _currentScene = SceneType.MainMenu;
 
 
-        public static void SetUpScenes()
+        public static void SetUp()
         {
             _scenes[(int)SceneType.MainMenu] = new MainMenuScene();
             _scenes[(int)SceneType.Game] = new GameScene();

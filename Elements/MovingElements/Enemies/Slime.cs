@@ -47,6 +47,12 @@ namespace Elements
             {
                 map.AddElement(EmptyElement.InnerInstance, Position);
             }
+
+            if(_size == 3)
+            {
+                LootManager.GenerateLoot(LootOrigin.Slime);
+            }
+
         }
 
         private void Split(Map map)

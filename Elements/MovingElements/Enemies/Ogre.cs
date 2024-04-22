@@ -39,6 +39,12 @@ namespace Elements
             return false;
         }
 
+        protected override void Die(Map map)
+        {
+            base.Die(map);
+            LootManager.GenerateLoot(LootOrigin.Ogre);
+        }
+
         protected override void WriteDeathActionText()
         {
             Printer.AddActionText(ActionTextType.CombatPositive,"You killed an ogre!");

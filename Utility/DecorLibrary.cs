@@ -98,24 +98,9 @@ namespace Utility
 
         public static BiomeType RandomBiome()
         {
-            int chanceAdder = 0;
-            int chance;
-            int result = RandomPrecent();
-
-            for (int i = 0; i < _biomeChances.Length; i++)
-            {
-                chance = _biomeChances[i];
-
-                if (chance + chanceAdder >= result)
-                {
-                    return (BiomeType)i;
-                }
-
-                chanceAdder += chance;
-
-            }
-
-            return BiomeType.Field;
+            int chosenBiome = RandomWeightedIndex(_biomeChances);
+  
+            return (BiomeType)chosenBiome;
         }
 
         public static DecorationType[] GetDecorationByBiome(BiomeType type)

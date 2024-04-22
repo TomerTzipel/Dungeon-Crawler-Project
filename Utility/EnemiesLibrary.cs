@@ -38,7 +38,7 @@ namespace Utility
 
         public const int BAT_DAMAGE = 8;
         public const int BAT_ACCURACY = 50;
-        public const int BAT_EVASION = 60;
+        public const int BAT_EVASION = 40;
         public const int BAT_MULTIHIT = 10;
         public const int BAT_PIERCE = 0;
 

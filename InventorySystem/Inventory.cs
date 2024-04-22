@@ -11,8 +11,8 @@ namespace InventorySystem
         private PlayerCombatEntity _combatEntity;
 
         public int Keys { get; private set; } = 1;
-        public int Gold { get; private set; } = 10;
-        public int Potions { get; private set; } = 0;
+        public int Gold { get; private set; } = 0;
+        public int Potions { get; private set; } = 1;
 
 
         public List<Item> EquipableItems { get; private set; } = new List<Item>(20);
@@ -24,42 +24,16 @@ namespace InventorySystem
         public Inventory(PlayerCombatEntity combatEntity) 
         {
             _combatEntity = combatEntity;
-            GetItem(new Item("Cool Helmet",ItemType.Head,[new Buff(BuffType.Additive,StatType.Hp,10)]));
-            GetItem(new Item("Cool Chestplate", ItemType.Body, [new Buff(BuffType.Additive, StatType.Hp, 10)]));
-            GetItem(new Item("Cool Gauntlets", ItemType.Arms,[ new Buff(BuffType.Additive, StatType.Hp, 10) ]));
-            GetItem(new Item("Cool Ring", ItemType.Ring, [ new Buff(BuffType.Additive, StatType.Hp, 10) ]));
-            GetItem(new Item("Cool Leggings", ItemType.Legs, [new Buff(BuffType.Additive, StatType.Hp, 10) ]));
-            GetItem(new Item("Cool Necklace", ItemType.Necklace, [ new Buff(BuffType.Additive, StatType.Hp, 10) ]));
-
-
-            GetItem(new Item("A", ItemType.Trinket, [new Buff(BuffType.Additive, StatType.Hp, 10)]));
-            GetItem(new Item("B", ItemType.Trinket, [new Buff(BuffType.Additive, StatType.Hp, 10)]));
-            GetItem(new Item("C", ItemType.Trinket, [new Buff(BuffType.Additive, StatType.Hp, 10)]));
-            GetItem(new Item("D", ItemType.Trinket, [new Buff(BuffType.Additive, StatType.Hp, 10)]));
-            GetItem(new Item("E", ItemType.Trinket, [new Buff(BuffType.Additive, StatType.Hp, 10)]));
-            GetItem(new Item("F", ItemType.Trinket, [new Buff(BuffType.Additive, StatType.Hp, 10)]));
-            GetItem(new Item("G", ItemType.Trinket, [new Buff(BuffType.Additive, StatType.Hp, 10)]));
-            GetItem(new Item("H", ItemType.Trinket, [new Buff(BuffType.Additive, StatType.Hp, 10)]));
-            GetItem(new Item("I", ItemType.Trinket, [new Buff(BuffType.Additive, StatType.Hp, 10)]));
-            GetItem(new Item("K", ItemType.Trinket, [new Buff(BuffType.Additive, StatType.Hp, 10)]));
-            GetItem(new Item("J", ItemType.Trinket, [new Buff(BuffType.Additive, StatType.Hp, 10)]));
-            GetItem(new Item("L", ItemType.Trinket, [new Buff(BuffType.Additive, StatType.Hp, 10)]));
-            GetItem(new Item("M", ItemType.Trinket, [new Buff(BuffType.Additive, StatType.Hp, 10)]));
-            GetItem(new Item("O", ItemType.Trinket, [new Buff(BuffType.Additive, StatType.Hp, 10)]));
-            GetItem(new Item("P", ItemType.Trinket, [new Buff(BuffType.Additive, StatType.Hp, 10)]));
-            GetItem(new Item("Q", ItemType.Trinket, [new Buff(BuffType.Additive, StatType.Hp, 10)]));
-
-      
         }
 
-        public void GainKeys(int amount)
+        public void GainKey()
         {
-            Keys += amount;
+            Keys++;
             _combatEntity.DoesHUDNeedReprint = true;
         }
-        public void GainPotions(int amount)
+        public void GainPotion()
         {
-            Potions += amount;
+            Potions++;
             _combatEntity.DoesHUDNeedReprint = true;
         }
 
@@ -87,6 +61,7 @@ namespace InventorySystem
             {
                 return false;
             }
+
             Potions--;
             _combatEntity.DoesHUDNeedReprint = true;
             return true;
@@ -117,7 +92,7 @@ namespace InventorySystem
             _combatEntity.DoesHUDNeedReprint = true;
         }
 
-        public void GetItem(Item item)
+        public void AddItem(Item item)
         {
             ItemType type = item.Type;
 
