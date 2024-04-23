@@ -32,7 +32,6 @@ namespace SceneSystem
 
         public override void PrintScene()
         {
-
             Console.ForegroundColor = _titleColor;
             Console.WriteLine(_title);
 

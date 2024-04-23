@@ -129,7 +129,36 @@ namespace GameSystems
             Console.WriteLine($"Potions:{Inventory.Potions}");
             DoesHUDNeedReprint = false;
         }
+        public void PrintPlayerStats()
+        {
+            int cursorRow = Console.CursorTop, cursorColumn = Console.CursorLeft;
 
+            Console.Write("Stats:");
+            Console.SetCursorPosition(cursorColumn, cursorRow + 1);
+            cursorRow += 1;
+
+            Console.Write($"Damage - {Damage}");
+            Console.SetCursorPosition(cursorColumn, cursorRow + 1);
+            cursorRow += 1;
+
+            Console.Write($"Armor - {Armor}");
+            Console.SetCursorPosition(cursorColumn, cursorRow + 1);
+            cursorRow += 1;
+
+            Console.Write($"Pierce - {Pierce}");
+            Console.SetCursorPosition(cursorColumn, cursorRow + 1);
+            cursorRow += 1;
+
+            Console.Write($"Accuracy - {Accuracy}%");
+            Console.SetCursorPosition(cursorColumn, cursorRow + 1);
+            cursorRow += 1;
+
+            Console.Write($"Evasion - {Evasion}%");
+            Console.SetCursorPosition(cursorColumn, cursorRow + 1);
+
+            Console.Write($"Multihit - {Multihit}%");
+
+        }
         private void PrintHpBar()
         {
             int hpBarLength = 20;
@@ -179,6 +208,36 @@ namespace GameSystems
 
             Printer.AddActionText(type, text);
 
+        }
+
+        public void UsePotion()
+        {
+            if (Inventory.UsePotion())
+            {
+                int hpRestored = HealMaxHpPrecentage(20);
+                Printer.AddActionText(ActionTextType.CombatPositive, $"Drinking the potion you healed {hpRestored} HP");
+            }
+            else
+            {
+                Printer.AddActionText(ActionTextType.General, $"You have 0 potions...");
+            }
+            
+        }
+
+        private int HealMaxHpPrecentage(int precentage)
+        {
+            float heal = (_maxHp * precentage) / 100f;
+
+            int hpRestored = (int)heal;
+            _hp += hpRestored;
+
+            if(_hp > _maxHp)
+            {
+                hpRestored = _maxHp - (_hp - hpRestored);
+                _hp = _maxHp;
+            }
+
+            return hpRestored;
         }
     }
 }

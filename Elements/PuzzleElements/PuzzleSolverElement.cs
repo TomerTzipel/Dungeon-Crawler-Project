@@ -11,12 +11,8 @@ namespace Elements
             Foreground = PUZZLE_SOLVER_EFC;
         }
 
-        public void InputValueToSudokuElement(int value)
+        public void UpadteBackground()
         {
-            SudokuElement sudokuElement = (SudokuElement)WalkableElementOnTopOf;
-            sudokuElement.InputValue(value);
-
-            _originalBackgroundColor = Background;
             Background = WalkableElementOnTopOf.Background;
         }
 

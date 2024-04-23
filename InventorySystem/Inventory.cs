@@ -47,6 +47,7 @@ namespace InventorySystem
         {
             if(Keys == 0)
             {
+                Printer.AddActionText(ActionTextType.General,"You have 0 keys...");
                 return false;
             }
 

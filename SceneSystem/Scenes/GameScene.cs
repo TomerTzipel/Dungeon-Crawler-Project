@@ -87,10 +87,16 @@ namespace SceneSystem
                 case InputType.SceneChange:
                     HandleSceneChange();
                     break;
+
+                case InputType.Potion:
+                    DrinkPotion();
+                    break;
+
                 default:
                     break;
             }
         }
+
 
         private void HandleMovement()
         {
@@ -108,6 +114,13 @@ namespace SceneSystem
 
             GameManager.PauseGame();
             InputManager.CleanInputBuffer();
+        }
+
+        private void DrinkPotion()
+        {
+            PlayerManager.PlayerElement.CombatEntity.UsePotion();
+            Printer.PrintHUD();
+            Printer.PrintActionText();
         }
 
         private bool SetUpLevel()

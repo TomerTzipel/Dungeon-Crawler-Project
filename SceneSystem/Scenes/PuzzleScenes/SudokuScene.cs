@@ -1,5 +1,6 @@
 ﻿
 
+
 namespace SceneSystem
 {
     public class SudokuScene : Scene
@@ -35,6 +36,7 @@ namespace SceneSystem
 
         protected override void HandleInput()
         {
+            ConsoleKeyInfo input = _inputManager.LastInput;
             InputType inputType = _inputManager.LastInputType;
 
             switch (inputType)
@@ -47,13 +49,21 @@ namespace SceneSystem
                     HandleSudoku();
                     break;
 
+                case InputType.SudokuEdit:
+                    HandleSudokuEdit(input);
+                    break;
+
                 case InputType.SceneChange:
                     HandleSceneChange();
                     break;
+
                 default:
                     break;
             }
         }
+
+    
+
         private void HandleMovement()
         {
             Direction direction = SceneInputManager.TranslateMovementInput();
@@ -73,7 +83,7 @@ namespace SceneSystem
             }
 
             SudokuPuzzle puzzle = (SudokuPuzzle)level.Puzzle;
-            bool wasSolved = puzzle.InputValue(value);
+            bool wasSolved = puzzle.InputValueAtSolver(value, true);
             if (wasSolved)
             {
                 Printer.AddActionText(ActionTextType.Item,"A reward for solving the sudoku:");
@@ -84,6 +94,31 @@ namespace SceneSystem
 
             Printer.PrintLevel();
             InputManager.CleanInputBuffer();
+        }
+        private void HandleSudokuEdit(ConsoleKeyInfo input)
+        {
+            ConsoleKey inputKey = input.Key;
+            Level level = LevelManager.CurrentLevel;
+            SudokuPuzzle puzzle = (SudokuPuzzle)level.Puzzle;
+
+            switch (inputKey)
+            {
+                case ConsoleKey.Z:
+                    if (input.Modifiers.HasFlag(ConsoleModifiers.Control)) 
+                    {
+                        puzzle.UndoAction();
+                    }
+                    break;
+
+                case ConsoleKey.Y:
+                    if (input.Modifiers.HasFlag(ConsoleModifiers.Control))
+                    {
+                        puzzle.RedoAction();
+                    }
+                    break;
+            }
+
+            SceneManager.PrintCurrentScene();
         }
 
         private void HandleSceneChange()

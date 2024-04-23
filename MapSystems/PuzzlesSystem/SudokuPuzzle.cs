@@ -1,11 +1,33 @@
 ﻿
+using Elements;
+using System;
+
 namespace MapSystems
 {
+
+    public struct SudokuAction
+    {
+        public Point Position { init; get; }
+        public int OldValue { init; get; }
+        public int NewValue { init; get; }
+
+        public SudokuAction(Point position, int oldValue, int newValue)
+        {
+            Position = position;
+            OldValue = oldValue;
+            NewValue = newValue;
+        }
+    }
+
     public class SudokuPuzzle : Puzzle
     {
         private const string SUDOKU_DIRECTORY_PATH = "..\\..\\..\\Puzzles\\Sudoku";
 
         private int _needToSolveCount = 0;
+
+        private Stack<SudokuAction> _PriorActions = new Stack<SudokuAction>(45);
+        private Stack<SudokuAction> _NextActions = new Stack<SudokuAction>(5);
+        private SudokuAction _lastAction;
 
         public bool IsSolved
         {
@@ -87,13 +109,8 @@ namespace MapSystems
             return new SudokuElement(type, value);
         }
 
-        public bool InputValue(int newValue)
+        public bool InputValueAtSolver(int newValue, bool isMoveNew)
         {
-            if (_solver.WalkableElementOnTopOf == null)
-            {
-                return IsSolved;
-            }
-
             SudokuElement elementSolverIsOn = (SudokuElement)_solver.WalkableElementOnTopOf;
             if (elementSolverIsOn.Type == SudokuElementType.Given)
             {
@@ -107,24 +124,78 @@ namespace MapSystems
                 return IsSolved;
             }
 
-            CheckForErroneousInput(elementSolverIsOn, oldValue, newValue, _solver.Position);
+            SudokuAction action = new SudokuAction(new Point(_solver.Position), oldValue, newValue);
 
-            bool wasSolved = elementSolverIsOn.IsSolved;
+            if (isMoveNew)
+            {
+                _PriorActions.Push(action);
+                if (_NextActions.Count != 0)
+                {
+                    _NextActions.Clear();
+                }
+            }
 
-            _solver.InputValueToSudokuElement(newValue);
+            InputValue(elementSolverIsOn, newValue, _solver.Position);
 
+            _solver.UpadteBackground();
 
+            return IsSolved;
+        }
 
-            if (elementSolverIsOn.IsSolved && !wasSolved)
+        private void InputValue(SudokuElement element, int newValue, Point position)
+        {
+            _lastAction = new SudokuAction(position, element.CurrentValue, newValue);
+            CheckForErroneousInput(element, element.CurrentValue, newValue, position);
+
+            bool wasSolved = element.IsSolved;
+
+            element.InputValue(newValue);
+
+            if (element.IsSolved && !wasSolved)
             {
                 _needToSolveCount--;
             }
-            else if (!elementSolverIsOn.IsSolved && wasSolved)
+            else if (!element.IsSolved && wasSolved)
             {
                 _needToSolveCount++;
             }
+        }
 
-            return IsSolved;
+        public void UndoAction()
+        {
+            if (_PriorActions.Count != 0)
+            {
+                SudokuAction action = _PriorActions.Pop();
+                InputValueAtPosition(action.OldValue, action.Position);
+                _NextActions.Push(action);
+                _solver.UpadteBackground();
+            }
+                
+        }
+
+        public void RedoAction()
+        {
+            if(_NextActions.Count != 0)
+            {
+                SudokuAction action = _NextActions.Pop();
+                InputValueAtPosition(action.NewValue, action.Position);
+                _PriorActions.Push(action);
+                _solver.UpadteBackground();
+            }   
+        }
+
+        private void InputValueAtPosition(int newValue, Point position)
+        {
+            Element element = ElementAt(position);
+
+            if (element is PuzzleSolverElement)
+            {
+                InputValueAtSolver(newValue,false);
+            }
+            if (element is SudokuElement sudokuElement)
+            {
+                InputValue(sudokuElement, newValue, position);
+            }
         }
 
         private void CheckForErroneousInput(SudokuElement element, int oldValue, int newValue, Point elementPosition)
@@ -150,12 +221,21 @@ namespace MapSystems
                     continue;
                 }
 
-                if (row == _solver.Position.Y)
+                if (row == _lastAction.Position.Y)
                 {
                     continue;
                 }
 
-                SudokuElement currentElement = (SudokuElement)ElementAt(row, column);
+                SudokuElement currentElement;
+
+                if (ElementAt(row, column) is PuzzleSolverElement solver)
+                {
+                    currentElement = (SudokuElement)solver.WalkableElementOnTopOf;
+                }
+                else
+                {
+                    currentElement = (SudokuElement)ElementAt(row, column);
+                }
 
                 if (newValue != 0 && currentElement.CurrentValue == newValue)
                 {
@@ -185,12 +265,21 @@ namespace MapSystems
                     continue;
                 }
 
-                if (column == _solver.Position.X)
+                if (column == _lastAction.Position.X)
                 {
                     continue;
                 }
 
-                SudokuElement currentElement = (SudokuElement)ElementAt(row, column);
+                SudokuElement currentElement;
+
+                if (ElementAt(row, column) is PuzzleSolverElement solver)
+                {
+                    currentElement = (SudokuElement)solver.WalkableElementOnTopOf;
+                }
+                else
+                {
+                    currentElement = (SudokuElement)ElementAt(row, column);
+                }
 
                 if (newValue != 0 && currentElement.CurrentValue == newValue)
                 {
@@ -223,12 +312,21 @@ namespace MapSystems
                         continue;
                     }
 
-                    if (column == _solver.Position.X && row == _solver.Position.Y)
+                    if (column == _lastAction.Position.X && row == _lastAction.Position.Y)
                     {
                         continue;
                     }
 
-                    SudokuElement currentElement = (SudokuElement)ElementAt(row, column);
+                    SudokuElement currentElement;
+
+                    if (ElementAt(row, column) is PuzzleSolverElement solver)
+                    {
+                        currentElement = (SudokuElement)solver.WalkableElementOnTopOf;
+                    }
+                    else
+                    {
+                        currentElement = (SudokuElement)ElementAt(row, column);
+                    }
 
                     if (newValue != 0 && currentElement.CurrentValue == newValue)
                     {

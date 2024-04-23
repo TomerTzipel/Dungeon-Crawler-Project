@@ -1,4 +1,5 @@
 ﻿using Dungeon_Crawler.SceneSystem.InputManagers;
+using InventorySystem;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,6 +29,14 @@ namespace SceneSystem
             }
 
             base.HandleInput();
+        }
+
+        public override void PrintScene()
+        {
+            base.PrintScene();
+
+            Console.SetCursorPosition(25, 0);
+            PlayerManager.PlayerElement.CombatEntity.PrintPlayerStats();
         }
 
     }

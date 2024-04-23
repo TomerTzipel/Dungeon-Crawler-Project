@@ -25,7 +25,11 @@ namespace SceneSystem
                 case ConsoleKey.I:
                 case ConsoleKey.Escape:
                     return InputType.SceneChange;
-                    
+
+                case ConsoleKey.Q:
+                    return InputType.Potion;
+
+
                 default:
                     return InputType.Error;
                     

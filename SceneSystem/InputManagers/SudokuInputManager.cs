@@ -19,6 +19,10 @@ namespace SceneSystem
                 case ConsoleKey.D9:
                 case ConsoleKey.Backspace:
                     return InputType.Sudoku;
+
+                case ConsoleKey.Z:
+                case ConsoleKey.Y:
+                    return InputType.SudokuEdit;
             }
 
             return base.TranslateInput();
@@ -57,7 +61,6 @@ namespace SceneSystem
 
                 case ConsoleKey.Backspace:
                     if (LastInput.Modifiers.HasFlag(ConsoleModifiers.Control)) return -1;
-
                     return 0;
 
                 default: return -1;
