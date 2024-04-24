@@ -48,14 +48,11 @@ namespace InventorySystem
     }
     public class Item
     {
-
-        
         public string Name { get; private set; }    
         public ItemType Type { get; private set;}
         public List<Buff> Buffs { get; private set; }
-
+        
         public bool IsEquipped {  get; private set; } = false;
-
 
         public Item(string name, ItemType type, List<Buff> buffs )
         {
@@ -63,8 +60,6 @@ namespace InventorySystem
             Type = type;
             Buffs = buffs;
         }
-
-
 
         public void PrintBuffs()
         {

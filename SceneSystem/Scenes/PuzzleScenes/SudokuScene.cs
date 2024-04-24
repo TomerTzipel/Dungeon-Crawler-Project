@@ -127,8 +127,6 @@ namespace SceneSystem
             SceneManager.ChangeScene(scene);
 
             _isCurrentScene = false;
-
-            InputManager.CleanInputBuffer();
         }
 
         public override void PrintScene()

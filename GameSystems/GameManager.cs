@@ -11,6 +11,9 @@ namespace GameSystems
         private static Thread _enemiesThread;
         public static bool IsGamePaused { get; private set; } = true;
 
+        public static bool IsShopAvailable { get; set; } = true;
+        public static bool IsShopActive { get; set; } = false;
+
         public static bool GameResult{ get; private set; }
 
         public static void GameSetUp() 
@@ -20,6 +23,8 @@ namespace GameSystems
                 LevelManager.ExitLevel();
             }
 
+            IsShopAvailable = true;
+            IsShopActive = false;
             Printer.ResetActionTextPrinter();
             LevelManager.ResetLevelValue();
             PlayerManager.ClearPlayer();

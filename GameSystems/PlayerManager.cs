@@ -10,6 +10,14 @@ namespace GameSystems
 
         public static PlayerElement PlayerElement {  get; private set; }
 
+        public static Inventory PlayerInventory 
+        { 
+            get
+            {
+                return PlayerElement.Inventory;
+            }
+        }
+
         public static void InitializePlayer()
         {
             if (!_isPlyaerInit)

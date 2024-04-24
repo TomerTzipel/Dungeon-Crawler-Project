@@ -1,7 +1,5 @@
 ﻿
 
-using InventorySystem;
-
 namespace UI_System { 
     public class ItemButton : Button
     {
@@ -26,11 +24,11 @@ namespace UI_System {
 
             if (_item.IsEquipped)
             {
-                PlayerManager.PlayerElement.CombatEntity.Inventory.Unequip(_item.Type);
+                PlayerManager.PlayerInventory.Unequip(_item.Type);
             }
             else
             {
-                PlayerManager.PlayerElement.CombatEntity.Inventory.Equip(_item);
+                PlayerManager.PlayerInventory.Equip(_item);
             }
 
             return base.OnClick();

@@ -30,6 +30,21 @@ namespace SceneSystem
 
         public override void SceneLoop()
         {
+            if (GameManager.IsShopAvailable && (LevelManager.CurrentLevelValue + 1) % 2 == 0 & LevelManager.CurrentLevelValue != -1)
+            {
+                GameManager.IsShopAvailable = false;
+                SceneManager.ChangeScene(SceneType.Shop);
+                return;
+            }
+
+            if (GameManager.IsShopActive)
+            {
+                SceneManager.ChangeScene(SceneType.Shop);
+                return;
+            }
+
+            GameManager.IsShopAvailable = true;
+
             if (!LevelManager.IsLevelActive)
             {
                 bool wasLevelGenerated = SetUpLevel();
@@ -40,7 +55,6 @@ namespace SceneSystem
                 }
             }
 
-            //if a puzzle is active move to puzzle scene
             if (LevelManager.CurrentLevel.IsPuzzleActive)
             {
                 SceneManager.ChangeScene(SceneType.Puzzle);
@@ -113,7 +127,6 @@ namespace SceneSystem
             SceneManager.ChangeScene(scene);
 
             GameManager.PauseGame();
-            InputManager.CleanInputBuffer();
         }
 
         private void DrinkPotion()

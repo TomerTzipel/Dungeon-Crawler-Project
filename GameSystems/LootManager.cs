@@ -117,7 +117,7 @@ namespace GameSystems
                     break;
             }
 
-            PlayerManager.PlayerElement.CombatEntity.Inventory.GainGold(amount);
+            PlayerManager.PlayerInventory.GainGold(amount);
 
             _lootActionText += $"{amount} Gold!";
             Printer.AddActionText(ActionTextType.Loot, _lootActionText);
@@ -127,7 +127,7 @@ namespace GameSystems
 
         private static void RewardKey()
         {
-            PlayerManager.PlayerElement.CombatEntity.Inventory.GainKey();
+            PlayerManager.PlayerInventory.GainKey();
 
             _lootActionText += "a Key!";
             Printer.AddActionText(ActionTextType.Loot, _lootActionText);
@@ -136,7 +136,7 @@ namespace GameSystems
 
         private static void RewardPotion()
         {
-            PlayerManager.PlayerElement.CombatEntity.Inventory.GainPotion();
+            PlayerManager.PlayerInventory.GainPotion();
 
             _lootActionText += "a Potion!";
             Printer.AddActionText(ActionTextType.Loot, _lootActionText);
@@ -162,7 +162,7 @@ namespace GameSystems
 
         private static void RewardItem(Item item)
         {
-            PlayerManager.PlayerElement.CombatEntity.Inventory.AddItem(item);
+            PlayerManager.PlayerInventory.AddItem(item);
 
             _lootActionText += item.ToString();
             Printer.AddActionText(ActionTextType.Item, _lootActionText);

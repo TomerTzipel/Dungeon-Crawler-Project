@@ -13,7 +13,9 @@ namespace UI_System
 
         public override bool OnClick()
         {
-            if (!LevelManager.IsLevelActive) return false;
+            if(GameManager.IsShopActive) return base.OnClick();
+
+            if (!LevelManager.IsLevelActive ) return false;
 
             return base.OnClick();
         }

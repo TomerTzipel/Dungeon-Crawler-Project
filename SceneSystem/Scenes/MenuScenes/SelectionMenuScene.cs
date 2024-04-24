@@ -5,13 +5,13 @@ namespace SceneSystem
     public abstract class SelectionMenuScene : Scene
     {
 
-        private string _title;
-        private ConsoleColor _titleColor;
+        protected string _title;
+        protected ConsoleColor _titleColor;
 
         protected Button[] _buttons;
 
-        private int _selectedButtonIndex;
-        private bool _wasButtonClicked;
+        protected int _selectedButtonIndex;
+        protected bool _wasButtonClicked;
 
         public SelectionMenuScene(int numberOfButtons, string title, ConsoleColor titleColor) : base(new SelectionMenuInputManager())
         {
@@ -19,7 +19,15 @@ namespace SceneSystem
             _titleColor = titleColor;
             _buttons = new Button[numberOfButtons];
         }
+        protected override void EnterScene()
+        {
+            _buttons[_selectedButtonIndex].Deselect();
 
+            _wasButtonClicked = false;
+            _selectedButtonIndex = 0;
+            _buttons[0].Select();
+            SceneManager.PrintCurrentScene();
+        }
         public override void SceneLoop()
         {
             EnterScene();
@@ -28,35 +36,6 @@ namespace SceneSystem
             {
                 base.SceneLoop();
             }
-        }
-
-        public override void PrintScene()
-        {
-            Console.ForegroundColor = _titleColor;
-            Console.WriteLine(_title);
-
-            Printer.ColorReset();
-            Console.WriteLine();
-
-            for (int i = 0; i < _buttons.Length; i++)
-            {
-                Console.WriteLine(_buttons[i]);
-                Printer.ColorReset();
-                Console.WriteLine();
-            }
-        }
-
-        protected override void EnterScene()
-        {
-            foreach (var button in _buttons)
-            {
-                button.Deselect();
-            }
-
-            _wasButtonClicked = false;
-            _selectedButtonIndex = 0;
-            _buttons[0].Select();
-            SceneManager.PrintCurrentScene();
         }
 
         protected override void HandleInput()
@@ -94,6 +73,7 @@ namespace SceneSystem
 
             SceneManager.PrintCurrentScene();
         }
+
         private void PriorButton()
         {
             _buttons[_selectedButtonIndex].Deselect();
@@ -131,6 +111,20 @@ namespace SceneSystem
 
         }
 
-        
+        public override void PrintScene()
+        {
+            Console.ForegroundColor = _titleColor;
+            Console.WriteLine(_title);
+
+            Printer.ColorReset();
+            Console.WriteLine();
+
+            for (int i = 0; i < _buttons.Length; i++)
+            {
+                Console.WriteLine(_buttons[i]);
+                Printer.ColorReset();
+                Console.WriteLine();
+            }
+        }
     }
 }

@@ -1,11 +1,4 @@
-﻿using InventorySystem;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UI_System;
-
+﻿
 namespace SceneSystem
 {
     public class InventoryMenuScene : Scene
@@ -21,9 +14,6 @@ namespace SceneSystem
         private Point selectedButtonMarkerPosition = new Point(0, -1);
         private bool _wasButtonClicked;
 
-
-        public InventoryMenuScene() : base(new InventoryMenuInputManger()) { }
-
         protected InventoryMenuInputManger SceneInputManager
         {
             get
@@ -31,6 +21,9 @@ namespace SceneSystem
                 return (InventoryMenuInputManger)_inputManager;
             }
         }
+
+        public InventoryMenuScene() : base(new InventoryMenuInputManger()) { }
+
         protected override void EnterScene()
         { 
             GenerateEquippedItemsShowcase();
@@ -86,8 +79,8 @@ namespace SceneSystem
 
             SceneManager.ChangeScene(scene);
             _isCurrentScene = false;
-            InputManager.CleanInputBuffer();
         }
+
         private void HandleButtonActivation()
         {
             ItemButton selectedButton = GetSelectedButton();
@@ -216,7 +209,7 @@ namespace SceneSystem
         }
         private void PrintTrinkets()
         {
-            List<Item> trinkets = PlayerManager.PlayerElement.CombatEntity.Inventory.Trinkets;
+            List<Item> trinkets = PlayerManager.PlayerInventory.Trinkets;
 
             int cursorRow, cursorColumn;
 
@@ -250,7 +243,7 @@ namespace SceneSystem
         
         private void GenerateEquippedItemsShowcase()
         {
-            Item[] equippedItems = PlayerManager.PlayerElement.CombatEntity.Inventory.EquippedItems;
+            Item[] equippedItems = PlayerManager.PlayerInventory.EquippedItems;
 
             for (int i = 0; i < equippedItems.Length; i++)
             {
@@ -259,7 +252,7 @@ namespace SceneSystem
         }
         private void GenerateEquipableItemsShowcase()
         {
-            List<Item> equipableItems = PlayerManager.PlayerElement.CombatEntity.Inventory.EquipableItems;
+            List<Item> equipableItems = PlayerManager.PlayerInventory.EquipableItems;
             int count = 0;
 
             _equipableItemsShowcase = new List<ItemButton[]>(5);

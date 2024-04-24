@@ -12,7 +12,9 @@ namespace GameSystems
     {
         public static Level CurrentLevel { get; private set; }
 
-        public static bool IsLevelActive = false;
+        public static bool IsLevelActive { get; set; } = false;
+
+        
 
         private static readonly int[] _levelNumberOfSections = [38, 48, 72, 84, 97, 120, 132, 172, 194, 240];
         private static readonly int[] _levelSizes = [8, 9, 11, 12, 13, 14, 15, 17, 18, 20];

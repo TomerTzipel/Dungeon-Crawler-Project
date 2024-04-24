@@ -11,7 +11,7 @@ namespace InventorySystem
         private PlayerCombatEntity _combatEntity;
 
         public int Keys { get; private set; } = 1;
-        public int Gold { get; private set; } = 0;
+        public int Gold { get; private set; } = 500;
         public int Potions { get; private set; } = 1;
 
 

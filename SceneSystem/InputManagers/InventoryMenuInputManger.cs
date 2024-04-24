@@ -61,7 +61,7 @@ namespace SceneSystem
             }
         }
 
-        public SceneType TranslateSceneChangeInput()
+        public virtual SceneType TranslateSceneChangeInput()
         {
             switch (LastInput.Key)
             {
