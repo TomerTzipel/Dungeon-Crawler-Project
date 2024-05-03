@@ -23,7 +23,7 @@ namespace GameSystems
                 LevelManager.ExitLevel();
             }
 
-            IsShopAvailable = true;
+            IsShopAvailable = false;
             IsShopActive = false;
             Printer.ResetActionTextPrinter();
             LevelManager.ResetLevelValue();

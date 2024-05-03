@@ -30,7 +30,7 @@ namespace SceneSystem
 
         public override void SceneLoop()
         {
-            if (GameManager.IsShopAvailable && (LevelManager.CurrentLevelValue + 1) % 2 == 0 & LevelManager.CurrentLevelValue != -1)
+            if (GameManager.IsShopAvailable)
             {
                 GameManager.IsShopAvailable = false;
                 SceneManager.ChangeScene(SceneType.Shop);
@@ -42,8 +42,6 @@ namespace SceneSystem
                 SceneManager.ChangeScene(SceneType.Shop);
                 return;
             }
-
-            GameManager.IsShopAvailable = true;
 
             if (!LevelManager.IsLevelActive)
             {
