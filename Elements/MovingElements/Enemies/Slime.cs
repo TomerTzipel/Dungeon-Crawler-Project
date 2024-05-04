@@ -6,7 +6,7 @@ namespace Elements
     {
         private int _size;
 
-        public Slime(Point position, int size) : base(position, EMPTY_EI, new CombatEntity(0,0,0,0,0,0,0))
+        public Slime(Point position, int size) : base(position, EMPTY_EI)
         {
             _size = size;
             _movementSpeed = size / 2f;
@@ -29,6 +29,8 @@ namespace Elements
                     CombatEntity = new CombatEntity(SLIME1_HP, SLIME1_DAMAGE, SLIME1_EVASION, SLIME_ACCURACY, SLIME1_MULTIHIT, SLIME_ARMOR, SLIME_PIERCE);
                     break;
             }
+
+            ScaleByDifficulty();
         }
 
 

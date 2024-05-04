@@ -33,6 +33,7 @@ namespace GameSystems
 
         private static string GenerateName(ItemType type)
         {
+            //FIX
             string name = "ITEM";
 
             switch (type)
@@ -73,7 +74,7 @@ namespace GameSystems
 
         private static List<Buff> GenerateBuffsByLevel()
         {
-            Difficulty difficulty = LevelManager.CurrentDifficulty;
+            Difficulty difficulty = LevelManager.DynamicDifficulty;
             int amountOfBuffs = 1 + (int)difficulty;
 
             List<Buff> buffs = new List<Buff>(amountOfBuffs);

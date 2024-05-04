@@ -1,6 +1,8 @@
 ﻿
 
+using System;
 using System.Diagnostics;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace GameSystems
 {
@@ -62,13 +64,27 @@ namespace GameSystems
         {
             _maxHp = maxHp;
             _hp = maxHp;
-            _damage = damage;
 
+            _damage = damage;
             _accuracy = accuracy;
             _evasion = evasion;
             _multihit = multihit;
             _armor = armor;
             _pierce = pierce;
+        }
+
+        public void ScaleStats(float precentage)
+        {
+            _maxHp = (int)(_maxHp * precentage);
+            _hp = _maxHp;
+
+            _damage = (int)(_damage * precentage);
+            _accuracy = (int)(_accuracy * precentage);
+            _evasion = (int)(_evasion * precentage);
+            _multihit = (int)(_multihit * precentage);
+            _armor = (int)(_armor * precentage);
+            _pierce = (int)(_pierce * precentage);
+
         }
 
         public bool Attack(CombatEntity defender)
@@ -167,7 +183,6 @@ namespace GameSystems
             }
 
             Printer.AddActionText(type,text);
-
         }
     }
 }

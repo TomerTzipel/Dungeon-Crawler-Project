@@ -36,7 +36,7 @@ namespace Utility
         public  const int BAT_HP = 20;
         public  const int BAT_ARMOR = 0;
 
-        public const int BAT_DAMAGE = 8;
+        public const int BAT_DAMAGE = 10;
         public const int BAT_ACCURACY = 50;
         public const int BAT_EVASION = 40;
         public const int BAT_MULTIHIT = 10;
@@ -72,7 +72,7 @@ namespace Utility
         public const int OGRE_HP = 100;
         public const int OGRE_ARMOR = 10;
 
-        public const int OGRE_DAMAGE = 10;
+        public const int OGRE_DAMAGE = 50;
         public const int OGRE_ACCURACY = 80;
         public const int OGRE_EVASION = 10;
         public const int OGRE_MULTIHIT = 20;
@@ -80,6 +80,21 @@ namespace Utility
 
         public const float OGRE_MOVEMENT_SPEED = 3.5f;
         public const int OGRE_RANGE = 5;
+
+        public static float DifficultyScaling { 
+            get
+            {
+                switch (LevelManager.CurrentDifficulty)
+                {
+                    case Difficulty.Medium:
+                        return 1.25f;
+                    case Difficulty.Hard:
+                        return 1.5f;
+                }
+
+                return 1f;
+            }
+        }
 
         public static EnemyType[] GetEnemiesByCurrentLevel()
         {
@@ -108,7 +123,31 @@ namespace Utility
             return null;
             
         }
+        public static EnemyType[] GetEnemiesByBiome(BiomeType type)
+        {
+            int chosenVarient;
+            switch (type)
+            {
+                case BiomeType.Mountain:
+                    chosenVarient = RandomIndex(MOUNTAIN_ENEMIES.Length);
+                    return MOUNTAIN_ENEMIES[chosenVarient];
 
+                case BiomeType.Field:
+                    chosenVarient = RandomIndex(FIELD_ENEMIES.Length);
+                    return FIELD_ENEMIES[chosenVarient];
+
+                case BiomeType.Forest:
+                    chosenVarient = RandomIndex(FOREST_ENEMIES.Length);
+                    return FOREST_ENEMIES[chosenVarient];
+
+                case BiomeType.Ruin:
+                    chosenVarient = RandomIndex(RUIN_ENEMIES.Length);
+                    return RUIN_ENEMIES[chosenVarient];
+
+            }
+
+            return null;
+        }
 
 
     }

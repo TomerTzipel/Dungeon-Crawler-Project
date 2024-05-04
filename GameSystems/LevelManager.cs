@@ -5,7 +5,7 @@ namespace GameSystems
 
     public enum Difficulty
     {
-        Easy, Medium, Hard
+        Easy, Medium, Hard, Dynamic
     }
 
     public static class LevelManager
@@ -39,6 +39,21 @@ namespace GameSystems
         public static Difficulty CurrentDifficulty
         {
             get 
+            {
+                Difficulty chosenDifficulty = Settings.chosenDifficulty;
+
+                if(chosenDifficulty == Difficulty.Dynamic)
+                {
+                    return DynamicDifficulty;
+                }
+
+                return chosenDifficulty;
+            }
+        }
+
+        public static Difficulty DynamicDifficulty
+        {
+            get
             {
                 switch (CurrentLevelNumber)
                 {

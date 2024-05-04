@@ -1,8 +1,4 @@
 ﻿
-using System.Runtime.InteropServices;
-using System.Threading.Channels;
-using Utility;
-using static System.Collections.Specialized.BitVector32;
 
 namespace MapSystems
 {
@@ -240,9 +236,9 @@ namespace MapSystems
                 return;
             }
 
-            BiomeType biomeType = DecorLibrary.RandomBiome();
-            DecorationType[] decoration = DecorLibrary.GetDecorationByBiome(biomeType);
-            EnemyType[] enemies = DecorLibrary.GetEnemiesByBiome(biomeType);
+            BiomeType biomeType = RandomBiome();
+            DecorationType[] decoration = GetDecorationByBiome(biomeType);
+            EnemyType[] enemies = GetEnemiesByBiome(biomeType);
 
             float chance = 100f / (Size * Size);
 

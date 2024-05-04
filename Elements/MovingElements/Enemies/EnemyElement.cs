@@ -15,10 +15,27 @@ namespace Elements
 
         public CombatEntity CombatEntity { get; protected set; }
 
+        protected EnemyElement(Point position, string identifier) : base(position, identifier)
+        {
+            EnemyManager.Instance.AddEnemy(this);
+        }
+
+
         public EnemyElement(Point position, string identifier, CombatEntity combatEntity) : base(position, identifier) 
         {
             CombatEntity = combatEntity;
-            EnemyManager.Instance.AddEnemy(this);
+            ScaleByDifficulty();
+
+            EnemyManager.Instance.AddEnemy(this);  
+        }
+
+        protected void ScaleByDifficulty()
+        {
+            float scaling = DifficultyScaling;
+            Debug.WriteLine("scaling" + scaling);
+            CombatEntity.ScaleStats(scaling);
+
+            Debug.WriteLine(CombatEntity.Damage);
         }
 
         public virtual bool Tick(Map map, float interval)

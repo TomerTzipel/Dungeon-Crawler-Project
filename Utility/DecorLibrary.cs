@@ -129,31 +129,7 @@ namespace Utility
             return null;
         }
 
-        public static EnemyType[] GetEnemiesByBiome(BiomeType type)
-        {
-            int chosenVarient;
-            switch (type)
-            {
-                case BiomeType.Mountain:
-                    chosenVarient = RandomIndex(EnemiesLibrary.MOUNTAIN_ENEMIES.Length);
-                    return EnemiesLibrary.MOUNTAIN_ENEMIES[chosenVarient];
-
-                case BiomeType.Field:
-                    chosenVarient = RandomIndex(EnemiesLibrary.FIELD_ENEMIES.Length);
-                    return EnemiesLibrary.FIELD_ENEMIES[chosenVarient];
-
-                case BiomeType.Forest:
-                    chosenVarient = RandomIndex(EnemiesLibrary.FOREST_ENEMIES.Length);
-                    return EnemiesLibrary.FOREST_ENEMIES[chosenVarient];
-
-                case BiomeType.Ruin:
-                    chosenVarient = RandomIndex(EnemiesLibrary.RUIN_ENEMIES.Length);
-                    return EnemiesLibrary.RUIN_ENEMIES[chosenVarient];
-
-            }
-
-            return null;
-        }
+       
 
     }
 }
