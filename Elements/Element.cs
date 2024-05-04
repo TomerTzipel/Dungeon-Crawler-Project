@@ -9,7 +9,6 @@ namespace Elements
         public ConsoleColor _background = DEFAULT_EBC;
         public ConsoleColor Foreground { get; protected set; } = DEFAULT_EFC;
 
-
         public virtual ConsoleColor Background
         {
             get

@@ -158,13 +158,11 @@ namespace SceneSystem
             LevelManager.CurrentLevel.PrintLevel();
             Printer.ColorReset();
 
-
             Printer.PrintActionText();
             Printer.ColorReset();
-            
-            LevelManager.CurrentLevel.PrintMiniMap();
-            Printer.ColorReset();
 
+            LevelManager.CurrentLevel.PrintMiniMap();// Print level only prints mini map after player movement
+            Printer.ColorReset();
         }
     }
 

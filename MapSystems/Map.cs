@@ -11,7 +11,7 @@ namespace MapSystems
 {
     public class Map
     {
-        private SectionMatrix _sectionsMatrix;
+        public SectionMatrix SectionsMatrix { get; private set; }
 
         private static readonly object _dataLock = new object();
 
@@ -65,7 +65,7 @@ namespace MapSystems
 
         public void GenerateMapFromSections()
         {
-            foreach (Section section in _sectionsMatrix.Sections) 
+            foreach (Section section in SectionsMatrix.Sections) 
             {
                 ExtractSectionToMap(section);
             }
@@ -86,14 +86,14 @@ namespace MapSystems
         }
         protected void GenerateSections(int numberOfSectionsToGenerate, int size, MapComposition mapComposition)
         {
-            _sectionsMatrix = new SectionMatrix(size, numberOfSectionsToGenerate);
-            _sectionsMatrix.GenerateSectionsLayout(mapComposition);
+            SectionsMatrix = new SectionMatrix(size, numberOfSectionsToGenerate);
+            SectionsMatrix.GenerateSectionsLayout(mapComposition);
         }
 
         public void LocalizePlayer(PlayerElement player)
         {
             int sectionSize = Section.Size;
-            Point startPosition = new Point(_sectionsMatrix.StartSectionPosition.X * sectionSize, _sectionsMatrix.StartSectionPosition.Y * sectionSize);
+            Point startPosition = new Point(SectionsMatrix.StartSectionPosition.X * sectionSize, SectionsMatrix.StartSectionPosition.Y * sectionSize);
 
             for (int i = 0; i < (sectionSize / 2); i++)
             {
@@ -107,7 +107,7 @@ namespace MapSystems
 
         public void PrintMiniMap()
         {
-            _sectionsMatrix.Print();
+            SectionsMatrix.Print();
         }
        
         public void PrintToCamera(Camera camera)

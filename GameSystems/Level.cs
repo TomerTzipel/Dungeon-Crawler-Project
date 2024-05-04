@@ -8,7 +8,9 @@ namespace GameSystems
 {
     public class Level
     {
-        private Camera _camera;
+        
+        private MiniMap _miniMap;
+
         public Map Map { get; private set; }
         
         public Puzzle Puzzle { get; private set; }
@@ -18,7 +20,7 @@ namespace GameSystems
         public Level(int matrixSectionSize, int numberOfSections,MapComposition mapComposition, PlayerElement player)
         {
             GenerateMapLayout(numberOfSections, matrixSectionSize, mapComposition, player);
-            _camera = new Camera(Printer.CAMERA_WIDTH, Printer.CAMERA_HEIGHT);
+            GenerateMiniMap(Map.SectionsMatrix, matrixSectionSize);
         }
 
         private void GenerateMapLayout(int numberOfSectionsToGenerate, int matrixSectionSize, MapComposition mapComposition, PlayerElement player)
@@ -26,8 +28,11 @@ namespace GameSystems
             Map = new Map(numberOfSectionsToGenerate, matrixSectionSize, mapComposition,player);
            
         }
+        private void GenerateMiniMap(SectionMatrix sectionMatrix , int size)
+        {
+            _miniMap = new MiniMap(sectionMatrix, size);
+        }
 
-       
 
         public void PrintLevel()
         {
@@ -37,14 +42,24 @@ namespace GameSystems
                 return;
             }
 
-            PrintCamera();
+            PrintCameraAndMiniMap();
         }
 
-        public void PrintCamera()
+        public void PrintCameraAndMiniMap()
         {
             //Printer.SetPrinterPosition(0, 5);
             Console.SetCursorPosition(0, 5);
-            Map.PrintToCamera(_camera);
+            Map.PrintToCamera(Printer.Camera);
+
+            Printer.ColorReset();
+
+            if (_miniMap.DoesRequireReprint)
+            {
+                PrintMiniMap();
+                _miniMap.DoesRequireReprint = false;
+            }
+
+
         }
 
         public void PrintPuzzle()
@@ -53,7 +68,7 @@ namespace GameSystems
         }
         public void PrintMiniMap()
         {
-            Map.PrintMiniMap();
+            _miniMap.Print();
         }
 
         public void PrintHUD()
@@ -61,10 +76,10 @@ namespace GameSystems
             PlayerManager.PlayerElement.CombatEntity.PrintPlayerStatus();
         }
 
-
         public void MovePlayer(PlayerElement player,Direction direction)
         {
             Map.MoveElementInDirection(player, direction);
+            _miniMap.DiscoverSectionsAroundPlayer();
         }
 
         public void MoveSolver(Direction direction)

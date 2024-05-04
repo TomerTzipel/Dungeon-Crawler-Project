@@ -337,27 +337,27 @@ namespace MapSystems
 
                         case SectionType.Start:
                             Console.BackgroundColor = ConsoleColor.Green;
-                            Console.Write($"  ");
+                            Console.Write("  ");
                             continue;
 
                         case SectionType.Exit:
                             Console.BackgroundColor = ConsoleColor.Red;
-                            Console.Write($"  ");
+                            Console.Write("  ");
                             continue;
 
                         case SectionType.Inner:
                             Console.BackgroundColor = ConsoleColor.Magenta;
-                            Console.Write($"  ");
+                            Console.Write("  ");
                             continue;
 
                         case SectionType.Enemy:
                             Console.BackgroundColor = ConsoleColor.Yellow;
-                            Console.Write($"  ");
+                            Console.Write("  ");
                             continue;
                     }
                   
                     Console.BackgroundColor = ConsoleColor.Gray;
-                    Console.Write($"  ");
+                    Console.Write("  ");
 
                 }
                 Console.SetCursorPosition((Printer.CAMERA_WIDTH * 2) + 1,  i + 1);

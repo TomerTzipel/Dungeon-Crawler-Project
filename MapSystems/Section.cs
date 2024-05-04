@@ -8,7 +8,9 @@ namespace MapSystems
         Puzzle, Enemy, Chest, Trap, Spawner,
 
         //Generation Sections
-        PsuedoStart, Discontinue, End, Inner, Outer, Start, Exit, Error
+        PsuedoStart, Discontinue, End, Inner, Outer, Start, Exit, 
+        
+        Error
     }
 
   

@@ -214,6 +214,13 @@ namespace GameSystems
         {
             if (Inventory.UsePotion())
             {
+                if(_hp == _maxHp)
+                {
+                    Printer.AddActionText(ActionTextType.General, $"You are at full health...");
+                    Inventory.GainPotion();
+                    return;
+                }
+
                 int hpRestored = HealMaxHpPrecentage(20);
                 Printer.AddActionText(ActionTextType.CombatPositive, $"Drinking the potion you healed {hpRestored} HP");
             }

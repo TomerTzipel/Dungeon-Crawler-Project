@@ -9,19 +9,25 @@ namespace GameSystems
         public static ConsoleColor _currentForeground = DEFAULT_EFC;
         public static ConsoleColor _currentBackground = DEFAULT_EBC;
 
-        public const int CAMERA_WIDTH = 21;
-        public const int CAMERA_HEIGHT = 13;
+       
 
         public static readonly Point PRINTER_PIVOT = new Point(0, 0);
 
         private static readonly object _printerLock = new object();
-
+       
 
         private const int ACTION_TEXT_MAX_LINES = 10;
         private static ActionTextPrinter _actionTextPrinter;
 
+        public static Camera Camera { get; private set; }
+
+        public const int CAMERA_WIDTH = 21;
+        private const int CAMERA_HEIGHT = 13;
+
         public static void SetUp()
         {
+            Camera = new Camera(CAMERA_WIDTH,CAMERA_HEIGHT);
+
             //Console.BufferWidth = 5000;
             ResetActionTextPrinter();
             Console.CursorVisible = false;

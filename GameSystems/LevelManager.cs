@@ -40,7 +40,7 @@ namespace GameSystems
         {
             get 
             {
-                Difficulty chosenDifficulty = Settings.chosenDifficulty;
+                Difficulty chosenDifficulty = Settings.ChosenDifficulty;
 
                 if(chosenDifficulty == Difficulty.Dynamic)
                 {
