@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace SceneSystem
 {
-    public class ShopInputManager : InventoryMenuInputManger
+    public class ShopInputManager : UserInterfaceInputManager
     {
-        public override SceneType TranslateSceneChangeInput()
+        public SceneType TranslateSceneChangeInput()
         {
             switch (LastInput.Key)
             {

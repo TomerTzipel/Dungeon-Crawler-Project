@@ -12,8 +12,8 @@ namespace UI_System
 
         public override bool OnClick()
         {
-            Settings.ToggleRevealMiniMap();
-            return base.OnClick();
+            _toggle = Settings.ToggleRevealMiniMap();
+            return true;
         }
 
     }

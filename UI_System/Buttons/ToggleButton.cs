@@ -9,7 +9,7 @@ namespace UI_System
     public abstract class ToggleButton : Button
     {
 
-        private bool _toggle = false;
+        protected bool _toggle = false;
 
         public ToggleButton(string text) : base(text) {  }
         

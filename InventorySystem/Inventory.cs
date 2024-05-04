@@ -233,6 +233,5 @@ namespace InventorySystem
         {
             _combatEntity.LoseHpBuff(value);
         }
-
     }
 }

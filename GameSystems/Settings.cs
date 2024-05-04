@@ -16,13 +16,15 @@ namespace GameSystems
         {
             ChosenDifficulty = difficulty;
         }
-        public static void ToggleRevealMiniMap()
+        public static bool ToggleRevealMiniMap()
         {
             RevealMiniMap = !RevealMiniMap;
+            return RevealMiniMap;
         }
-        public static void ToggleInvincibility()
+        public static bool ToggleInvincibility()
         {
             Invincibility = !Invincibility;
+            return Invincibility;
         }
         public static void ChangePlayerColor(ConsoleColor color)
         {

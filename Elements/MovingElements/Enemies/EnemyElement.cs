@@ -32,10 +32,7 @@ namespace Elements
         protected void ScaleByDifficulty()
         {
             float scaling = DifficultyScaling;
-            Debug.WriteLine("scaling" + scaling);
             CombatEntity.ScaleStats(scaling);
-
-            Debug.WriteLine(CombatEntity.Damage);
         }
 
         public virtual bool Tick(Map map, float interval)

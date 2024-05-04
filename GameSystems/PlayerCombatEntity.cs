@@ -60,6 +60,8 @@ namespace GameSystems
         {
             get
             {
+                if (Settings.Invincibility) return 100;
+
                 int additiveBuff = Inventory.GetBuff(BuffType.Additive, StatType.Evasion);
                 float multiplicativeBuff = Inventory.GetBuff(BuffType.Multiplicative, StatType.Evasion) / 100f;
                 return (int)((base.Evasion + additiveBuff) * multiplicativeBuff);

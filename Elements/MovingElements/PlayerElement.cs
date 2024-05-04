@@ -1,6 +1,7 @@
 ﻿
 
 using GameSystems;
+using InventorySystem;
 using MapSystems;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -23,10 +24,6 @@ namespace Elements
         public PlayerElement(Point position) : base(position, PLAYER_RIGHT_EI )
         {
             CombatEntity = new PlayerCombatEntity(MAX_HP, DAMAGE, EVASION, ACCURACY, MULTI_HIT, ARMOR, PIERCE);
-            if (Settings.Invincibility)
-            {
-                CombatEntity = new PlayerCombatEntity(MAX_HP, DAMAGE, 100, ACCURACY, MULTI_HIT, ARMOR, PIERCE);
-            }
 
             IsOnWalkableElement = true;
             ChangeColor(Settings.PlayerColor);

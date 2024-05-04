@@ -1,7 +1,7 @@
 ﻿
 namespace SceneSystem
 {
-    public class InventoryMenuScene : Scene
+    public class InventoryScene : Scene
     {
         private readonly ConsoleColor _titlesColor = ConsoleColor.Yellow;
 
@@ -22,7 +22,7 @@ namespace SceneSystem
             }
         }
 
-        public InventoryMenuScene() : base(new InventoryMenuInputManger()) { }
+        public InventoryScene() : base(new InventoryMenuInputManger()) { }
 
         protected override void EnterScene()
         { 

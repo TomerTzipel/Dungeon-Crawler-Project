@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MenuScenes
+namespace MapSystems
 {
     public class MiniMapSection
     {
@@ -15,6 +15,9 @@ namespace MenuScenes
         public MiniMapSection(Section section) 
         {
             Type = section.Type;
+
+            if (Settings.RevealMiniMap) Discover();
+
         }
         private ConsoleColor SectionColor
         {

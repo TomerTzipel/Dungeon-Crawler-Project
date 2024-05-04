@@ -12,8 +12,8 @@ namespace UI_System
 
         public override bool OnClick()
         {
-            Settings.ToggleInvincibility();
-            return base.OnClick();
+            _toggle = Settings.ToggleInvincibility();
+            return true;
         }
 
     }

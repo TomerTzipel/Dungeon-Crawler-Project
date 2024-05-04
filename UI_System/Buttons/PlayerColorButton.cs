@@ -17,7 +17,8 @@ namespace UI_System
 
         public override bool OnClick()
         {
-            Settings.PlayerColor = _color;
+            Settings.ChangePlayerColor(_color);
+            
             return base.OnClick();
         }
     }
