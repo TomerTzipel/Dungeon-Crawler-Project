@@ -109,7 +109,7 @@ namespace Elements
             }
         }
 
-        public override bool CollideWith(MovingElement collidor, Map map)
+        public override bool CollideWith(Element collidor, Map map)
         {
             if (collidor is PlayerElement player)
             {

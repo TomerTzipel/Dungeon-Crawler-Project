@@ -183,6 +183,8 @@ namespace MapSystems
 
                 if (ElementAt(newPosition) is DestroyableElement destroyableElement)
                 {
+                    element.CollideWith(destroyableElement, this);
+
                     bool collisionResult = destroyableElement.HitBy(element);
                     if (!collisionResult)
                     {

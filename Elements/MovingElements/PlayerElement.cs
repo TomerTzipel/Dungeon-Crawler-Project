@@ -43,11 +43,41 @@ namespace Elements
         {
             if (direction == Direction.Left)
             {
-                Identifier = PLAYER_LEFT_EI;
+                switch (Identifier)
+                {
+                    case (PLAYER_LEFT_EI):
+                    case (PLAYER_ATTACK_LEFT_EI):
+                        break;
+
+                    case (PLAYER_RIGHT_EI):
+                        Identifier = PLAYER_LEFT_EI;
+                        break; 
+
+                    case (PLAYER_ATTACK_RIGHT_EI):
+                        Identifier = PLAYER_ATTACK_LEFT_EI;
+                        break;
+                }
             }
+
             if (direction == Direction.Right)
             {
-                Identifier = PLAYER_RIGHT_EI;
+                switch (Identifier)
+                {
+                    case (PLAYER_RIGHT_EI):
+                    case (PLAYER_ATTACK_RIGHT_EI):
+                        break;
+
+                    case (PLAYER_LEFT_EI):
+                        Identifier = PLAYER_RIGHT_EI;
+                        break;
+
+                    case (PLAYER_ATTACK_LEFT_EI):
+                        Identifier = PLAYER_ATTACK_RIGHT_EI;
+                        break;
+
+                    
+
+                }
             }
         }
 
@@ -56,11 +86,19 @@ namespace Elements
             return attacker.Attack(CombatEntity);
         }
 
-        public override bool CollideWith(MovingElement collidor, Map map)
+        public override bool CollideWith(Element collidor, Map map)
         {
+            if (collidor is VaseElement || collidor is BoulderElement || collidor is BushElement)
+            {
+                AttackAnimation();
+                return false;
+            }
+
             if (collidor is EnemyElement enemy)
             {
                 enemy.GetAttacked(CombatEntity,map);
+
+                AttackAnimation();
 
                 if (!enemy.CombatEntity.IsAlive)
                 {
@@ -83,5 +121,30 @@ namespace Elements
         {
             Foreground = color;
         }
+
+        private void AttackAnimation()
+        {
+            switch (Identifier)
+            {
+                case(PLAYER_LEFT_EI):
+                    Identifier = PLAYER_ATTACK_LEFT_EI;
+                    break;
+
+                case (PLAYER_RIGHT_EI):
+                    Identifier = PLAYER_ATTACK_RIGHT_EI;
+                    break;
+
+                case (PLAYER_ATTACK_LEFT_EI):
+                    Identifier = PLAYER_LEFT_EI;
+                    break;
+
+                case (PLAYER_ATTACK_RIGHT_EI):
+                    Identifier = PLAYER_RIGHT_EI;
+                    break;
+            }
+        }
+
+
+
     }
 }

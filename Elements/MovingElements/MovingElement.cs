@@ -72,7 +72,7 @@ namespace Elements
         }
 
         //Return false if movement isn't allowed
-        public virtual bool CollideWith(MovingElement collidor, Map map)
+        public virtual bool CollideWith(Element collidor, Map map)
         {
             return false;
         }

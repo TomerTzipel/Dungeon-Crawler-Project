@@ -31,7 +31,11 @@ namespace Elements
 
         //Player Elements:
         public const string PLAYER_RIGHT_EI = "I/";
+        public const string PLAYER_ATTACK_RIGHT_EI = "I\\";
+
         public const string PLAYER_LEFT_EI = "\\I";
+        public const string PLAYER_ATTACK_LEFT_EI = "/I";
+        
 
         //Enemy Elements:
         public const string BAT_DDWN_EI = "/\\";
