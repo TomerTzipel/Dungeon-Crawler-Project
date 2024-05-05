@@ -154,7 +154,7 @@ namespace MapSystems
                     break;
 
                 case SectionType.Inner:
-                    GenerateInnerLayout();
+                    GenerateInnerLayout(true);
                     break;
 
                 case SectionType.Chest:
@@ -181,7 +181,11 @@ namespace MapSystems
             {
                 for (int j = 0; j < Size; j++)
                 {
-                    SectionLayout[i, j] = EmptyElement.InnerInstance;
+                    if(SectionLayout[i, j] == EmptyElement.OuterInstance)
+                    {
+                        SectionLayout[i, j] = EmptyElement.InnerInstance;
+                    }
+   
                 }
             }
         }
@@ -254,7 +258,7 @@ namespace MapSystems
             SectionLayout[Size / 2, Size / 2] = new PuzzleTeleportElement();
         }
 
-        private void GenerateInnerLayout()
+        private void GenerateInnerLayout(bool spawnEnemies)
         {
             if(!RollChance(BIOME_CHANCE))
             {
@@ -263,11 +267,11 @@ namespace MapSystems
 
             BiomeType biomeType = RandomBiome();
             DecorationType[] decoration = GetDecorationByBiome(biomeType);
-            EnemyType[] enemies = GetEnemiesByBiome(biomeType);
-
+ 
             float chance = 100f / (Size * Size);
 
             bool wasPlaced = false;
+            bool isThereSpace = false;
             DecorationType currentDecorationType;
 
             for (int k = 0; k < decoration.Length; k++)
@@ -281,20 +285,33 @@ namespace MapSystems
                         for (int j = 0; j < Size; j++)
                         {
                             Element currentElement = SectionLayout[i, j];
-                            if (currentElement is EmptyElement && !wasPlaced)
+                            if (currentElement is EmptyElement)
                             {
+                                isThereSpace = true;
                                 wasPlaced = AttemptToPlaceDecor(currentDecorationType, i, j, (int)chance);
 
                             }
+
+                            if (wasPlaced) break;
                         }
+
+                        if (wasPlaced) break;
                     }
+
+                    if (!isThereSpace) break;      
                 }
 
+                if (!isThereSpace) break;
+
+                isThereSpace = false;
                 wasPlaced = false;
             }
 
-            GenerateEnemyLayout(enemies);
-
+            if (spawnEnemies)
+            {
+                EnemyType[] enemies = GetEnemiesByBiome(biomeType);
+                GenerateEnemyLayout(enemies);
+            }
         }
 
         private bool AttemptToPlaceDecor(DecorationType type, int row, int column, int chance)
@@ -447,6 +464,7 @@ namespace MapSystems
             float chance = 100f / (Size * Size);
 
             bool wasPlaced = false;
+            bool isThereSpace = false;
             EnemyType currentEnemyType;
 
             for (int k = 0; k < enemies.Length; k++)
@@ -460,14 +478,23 @@ namespace MapSystems
                         for (int j = 0; j < Size; j++)
                         {
                             Element currentElement = SectionLayout[i, j];
-                            if (currentElement is EmptyElement && !wasPlaced)
+                            if (currentElement is EmptyElement)
                             {
+                                isThereSpace = true;
                                 wasPlaced = AttemptToPlaceEnemy(currentEnemyType, i, j, (int)chance);
-
                             }
+
+                            if (wasPlaced) break;
                         }
+
+                        if (wasPlaced) break;
                     }
+                    if (!isThereSpace) break;
                 }
+
+                if (!isThereSpace) break;
+
+                isThereSpace = false;
 
                 wasPlaced = false;
             }
@@ -481,26 +508,22 @@ namespace MapSystems
             {
                 Point spawnPosition = CalculateMapPositionByLayoutPosition(row, column);
 
-                EnemyElement enemy = null;
-
                 switch (type)
                 {
                     case EnemyType.Bat:
-                        enemy = new Bat(spawnPosition);
+                        SectionLayout[row, column] = new Bat(spawnPosition);
                         break;
 
                     case EnemyType.Slime:
-                        enemy = new Slime(spawnPosition,3);
+                        SectionLayout[row, column] = new Slime(spawnPosition,3);
                         break;
 
                     case EnemyType.Ogre:
-                        enemy = new Ogre(spawnPosition);
+                        SectionLayout[row, column] = new Ogre(spawnPosition);
                         break;
 
                 }
-
-                SectionLayout[row, column] = enemy;
-
+                
                 return true;
             }
 
@@ -508,7 +531,7 @@ namespace MapSystems
         }
         private void GenerateTrapLayout()
         {
-            GenerateInnerLayout();
+            GenerateInnerLayout(false);
 
             int chosenTrap = RandomRange(1,2);
 

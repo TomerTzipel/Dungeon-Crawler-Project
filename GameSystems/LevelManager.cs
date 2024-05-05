@@ -113,7 +113,6 @@ namespace GameSystems
 
         public static void ExitLevel()
         {
-            Debug.WriteLine(CurrentDifficulty);
             SpawnerManager.Instance.Reset();
             EnemyManager.Instance.Reset();
 

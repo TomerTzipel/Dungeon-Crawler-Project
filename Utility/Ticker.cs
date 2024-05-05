@@ -14,6 +14,20 @@ namespace Utility
         public bool IsActive { get; protected set; } = false;
         protected volatile List<ITickable> _tickables = new List<ITickable>(50);
 
+        public bool IsEmpty
+        {
+            get
+            {
+                return _tickables.Count == 0;
+            }
+        }
+        public int Count
+        {
+            get
+            {
+                return _tickables.Count;
+            }
+        }
         protected Stopwatch _tickStopwatch = new Stopwatch();
 
         protected void AddTickable(ITickable tickable)

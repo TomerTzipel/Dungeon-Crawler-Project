@@ -16,7 +16,7 @@ namespace SceneSystem
             }
         }
 
-        public SettingsScene() : base(13, "Settings", ConsoleColor.Yellow)
+        public SettingsScene() : base(14, "Settings", ConsoleColor.Yellow)
         {
             _inputManager = new UserInterfaceInputManager();
             SetUpSettingsScene();
@@ -42,7 +42,9 @@ namespace SceneSystem
 
             _buttons[11] = new InvincibilityButton();
 
-            _buttons[12] = new ChangeSceneButton("Main Menu", SceneType.MainMenu);
+            _buttons[12] = new ExitPrerequisiteButton();
+
+            _buttons[13] = new ChangeSceneButton("Main Menu", SceneType.MainMenu);
 
             _buttons[0].OnClick();
             _buttons[4].OnClick();
@@ -86,8 +88,6 @@ namespace SceneSystem
                     break;
             }
         }
-
-
 
         private void HandleButtonClick()
         {
@@ -158,14 +158,7 @@ namespace SceneSystem
                         break;
 
                     case Direction.Left:
-                        if (_selectedButtonIndex == 3)
-                        {
-                            _selectedButtonIndex = 12;
-                        }
-                        else
-                        {
-                            _selectedButtonIndex += 10;
-                        }
+                        _selectedButtonIndex += 10;
                         break;
 
                     case Direction.Right:
@@ -212,9 +205,9 @@ namespace SceneSystem
                         break;
 
                     case Direction.Right:
-                        if (_selectedButtonIndex > 6)
+                        if (_selectedButtonIndex > 7)
                         {
-                            _selectedButtonIndex = 12;
+                            _selectedButtonIndex = 13;
                         }
                         else
                         {
@@ -231,7 +224,7 @@ namespace SceneSystem
                     case Direction.Up:
                         if (_selectedButtonIndex == 10)
                         {
-                            _selectedButtonIndex = 12;
+                            _selectedButtonIndex = 13;
                         }
                         else
                         {
@@ -240,7 +233,7 @@ namespace SceneSystem
                         break;
 
                     case Direction.Down:
-                        if (_selectedButtonIndex == 12)
+                        if (_selectedButtonIndex == 13)
                         {
                             _selectedButtonIndex = 10;
                         }

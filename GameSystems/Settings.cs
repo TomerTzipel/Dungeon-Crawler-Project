@@ -8,9 +8,11 @@ namespace GameSystems
 
         public static ConsoleColor PlayerColor = DEFAULT_EFC;
 
-        public static bool Invincibility = false;
+        public static bool Invincibility { get; private set; } = false;
 
-        public static bool RevealMiniMap = false;
+        public static bool RevealMiniMap { get; private set; } = false;
+
+        public static bool DisableExitPrerequisite { get; private set; } = false;
 
         public static void changeDifficulty(Difficulty difficulty)
         {
@@ -25,6 +27,12 @@ namespace GameSystems
         {
             Invincibility = !Invincibility;
             return Invincibility;
+        }
+
+        public static bool ToggleExitPrerequisite()
+        {
+            DisableExitPrerequisite = !DisableExitPrerequisite;
+            return DisableExitPrerequisite;
         }
         public static void ChangePlayerColor(ConsoleColor color)
         {

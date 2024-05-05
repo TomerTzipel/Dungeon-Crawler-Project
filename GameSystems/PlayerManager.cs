@@ -1,6 +1,8 @@
 ﻿
 
 
+using System.Diagnostics;
+
 namespace GameSystems
 {
     //need to seperate MovingElement from PlayerManager

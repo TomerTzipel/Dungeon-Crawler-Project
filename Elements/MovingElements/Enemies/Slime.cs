@@ -38,7 +38,6 @@ namespace Elements
 
         protected override void Die(Map map)
         {
-
             EnemyManager.Instance.RemoveEnemy(this);
 
             Split(map);

@@ -13,7 +13,7 @@ namespace Utility
         private static string[] BodyNames = ["Gambeson", "Cuirass", "Corslet", "Mail", "Armor"];
         private static string[] LegsNames = ["Leggings", "Skirt", "Greaves"];
         private static string[] ArmsNames = ["Pauldron","Gauntlet"];
-        private static string[] RingNames = ["Ring"];
+        private static string[] RingNames = ["Ring","Band"];
         private static string[] NecklaceNames = ["Pendant", "Necklace","Collar", "Medallion"];
         private static string[] TrinketNames = ["Talisman", "Gem", "Blade","Tome"];
 

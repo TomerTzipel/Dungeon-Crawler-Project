@@ -146,7 +146,10 @@ namespace MapSystems
         {
             lock (_dataLock)
             {
-                if(ElementAt(element.Position) != element){
+                //This if statement isn't nesseccery as the bug that caused me to write it was fixed.
+                //Though it is better to keep it in case a new bug creates the same bug of ghost enemies.
+                if (ElementAt(element.Position) != element){
+                    Debug.WriteLine("Ghost");
                     return false;
                 }
 

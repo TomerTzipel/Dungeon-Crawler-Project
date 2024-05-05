@@ -16,7 +16,7 @@ namespace Elements
         {
             _movementSpeed = BASILISK_MOVEMENT_SPEED;
             ScaleByDifficulty();
-            EnemyManager.Instance.AddEnemy(this);
+            EnemyManager.Instance.AddEnemy(this); 
         }
 
         public override bool Tick(Map map, float interval)

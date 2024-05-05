@@ -14,6 +14,7 @@
 
         protected EnemyElement(Point position, string identifier) : base(position, identifier) { }
 
+
         public EnemyElement(Point position, string identifier, CombatEntity combatEntity) : base(position, identifier) 
         {
             CombatEntity = combatEntity;
