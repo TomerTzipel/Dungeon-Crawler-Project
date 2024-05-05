@@ -1,15 +1,19 @@
 ﻿
 
+
 namespace MapSystems
 {
     public enum SectionType
     {
-        //Game Sections
-        Puzzle, Enemy, Chest, Trap, Spawner,
+        //Game Sections  (Must be 0-3)
+        Puzzle, Enemy, Chest, Trap, 
 
         //Generation Sections
         PsuedoStart, Discontinue, End, Inner, Outer, Start, Exit, 
-        
+
+        //Boss Fight Sections
+        Boss, Spawner, BossStart, Gate, ShipLeft, ShipMid, ShipRight, EmptyInner,
+
         Error
     }
 
@@ -21,7 +25,7 @@ namespace MapSystems
 
         public  Point SectionMatrixPosition { get; private set; }
 
-        public static readonly int Size = 5; // Move to a Consts file
+        public static readonly int Size = 5; //Change at your own risk, though it should work except the ship position at the boss stage
 
         public SectionType Type { get; private set; } = SectionType.Inner;
 
@@ -98,8 +102,15 @@ namespace MapSystems
 
         public void GenerateLayout(List<Direction> directionsOfEdges)
         {
+            if (Type == SectionType.Outer) return;
 
             bool thereAreEdges = directionsOfEdges.Count != 0;  
+
+            if(Type == SectionType.ShipLeft || Type == SectionType.ShipMid || Type == SectionType.ShipRight)
+            {
+                GenerateShipLayout();
+                return;
+            }
 
             ChangeOuterElementsToInner();
 
@@ -148,6 +159,18 @@ namespace MapSystems
 
                 case SectionType.Chest:
                     GenerateChestLayout();
+                    break;
+
+                case SectionType.Boss:
+                    GenerateBossLayout();
+                    break;
+
+                case SectionType.Gate:
+                    GenerateGateLayout();
+                    break;
+
+                case SectionType.BossStart:
+                    GenerateBossStartLayout();
                     break;
             }
         }
@@ -210,7 +233,7 @@ namespace MapSystems
         
         private void GenerateStartLayout()
         {
-            SectionLayout[Size / 2, Size / 2] = new WalkableElement(ENTRY_EI);  //PlayerManager.Instance.PlayerElement.WalkOn();
+            SectionLayout[Size / 2, Size / 2] = new WalkableElement(ENTRY_EI);  
         }
 
         private void GenerateExitLayout()
@@ -335,9 +358,82 @@ namespace MapSystems
         {
             SectionLayout[Size / 2, Size / 2] = new ChestElement();
         }
+
+        private void GenerateBossStartLayout()
+        {
+            GenerateStartLayout();
+            SectionLayout[0, 0] = ObstacleElement.VerticalWallInstance;
+            SectionLayout[0, Size - 1] = ObstacleElement.VerticalWallInstance;
+            SectionLayout[Size - 1, 0] = ObstacleElement.VerticalWallInstance;
+            SectionLayout[Size - 1, Size - 1] = ObstacleElement.VerticalWallInstance;
+        }
+
+        private void GenerateGateLayout()
+        {
+            for (int i = 0; i < Size; i++)
+            {
+                SectionLayout[Size - 1, i] = GateElement.Instance;
+            }
+        }
+
+        private void GenerateBossLayout()
+        {
+            Point[] position = [CalculateMapPositionByLayoutPosition(3, 2),
+                                CalculateMapPositionByLayoutPosition(2, 2),
+                                CalculateMapPositionByLayoutPosition(1, 2),
+                                CalculateMapPositionByLayoutPosition(1, 1),
+                                CalculateMapPositionByLayoutPosition(0, 1)];
+
+            Basilisk basilisk = new Basilisk(position);
+
+            basilisk.PlaceInSection(this);
+        }
+
+        private void GenerateShipLayout()
+        {
+            switch (Type)
+            {
+                case SectionType.ShipLeft:
+                    SectionLayout[1, 3] = ShipSegmentElement.Instance;
+                    SectionLayout[1, 4] = ShipSegmentElement.Instance;
+                    SectionLayout[3, 3] = ShipSegmentElement.Instance;
+                    SectionLayout[3, 4] = ShipSegmentElement.Instance;
+
+                    for (int i = 0; i < Size; i++)
+                    {
+                        SectionLayout[2, i] = ShipSegmentElement.Instance;
+                    }
+                    break;
+
+                case SectionType.ShipMid:
+                    for (int i = 0; i < Size; i++)
+                    {
+                        for (int j = 0; j < Size; j++)
+                        {
+                            if (j == 0 && (i == 0 || i == Size - 1)) continue;
+
+                            SectionLayout[i, j] = ShipSegmentElement.Instance;
+                        }
+                    }
+                    break;
+
+                case SectionType.ShipRight:
+                    for (int i = 1; i <= 3; i++)
+                    {
+                        for (int j = 0; j <= 2; j++)
+                        {
+                            SectionLayout[i, j] = ShipSegmentElement.Instance;
+                        }
+                    }
+                    SectionLayout[2, 3] = ShipSegmentElement.Instance;
+
+                    break;
+            }
+        }
+
         private void GenerateEnemyLayoutByLevel()
         {
-            EnemyType[] enemies = EnemiesLibrary.GetEnemiesByCurrentLevel();
+            EnemyType[] enemies = GetEnemiesByCurrentLevel();
             GenerateEnemyLayout(enemies);
 
         }

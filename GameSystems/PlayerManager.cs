@@ -17,7 +17,13 @@ namespace GameSystems
                 return PlayerElement.Inventory;
             }
         }
-
+        public static PlayerCombatEntity CombatEntity
+        {
+            get
+            {
+                return PlayerElement.CombatEntity;
+            }
+        }
         public static void InitializePlayer()
         {
             if (!IsPlayerInit)

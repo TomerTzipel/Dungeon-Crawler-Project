@@ -8,6 +8,8 @@ namespace Elements
 
         public Slime(Point position, int size) : base(position, EMPTY_EI)
         {
+            EnemyManager.Instance.AddEnemy(this);
+
             _size = size;
             _movementSpeed = size / 2f;
             _range = SLIME_RANGE;

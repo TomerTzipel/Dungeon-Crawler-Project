@@ -33,7 +33,7 @@ namespace GameSystems
 
         private static string GenerateName(ItemType type)
         {
-            //FIX
+            //FIX item names
             string name = "ITEM";
 
             switch (type)

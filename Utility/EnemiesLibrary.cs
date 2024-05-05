@@ -66,8 +66,6 @@ namespace Utility
         public const int SLIME3_EVASION = 10;
         public const int SLIME3_MULTIHIT = 0;
 
-
-
         //OGRE STATS
         public const int OGRE_HP = 100;
         public const int OGRE_ARMOR = 10;
@@ -80,6 +78,19 @@ namespace Utility
 
         public const float OGRE_MOVEMENT_SPEED = 3.5f;
         public const int OGRE_RANGE = 5;
+
+        //BASILISK STATS
+        public const int BASILISK_HP = 800;
+        public const int BASILISK_ARMOR = 20;
+
+        public const int BASILISK_DAMAGE = 80;
+        public const int BASILISK_ACCURACY = 95;
+        public const int BASILISK_EVASION = 15;
+        public const int BASILISK_MULTIHIT = 10;
+        public const int BASILISK_PIERCE = 50;
+
+        public const float BASILISK_MOVEMENT_SPEED = 1.25f;
+
 
         public static float DifficultyScaling { 
             get

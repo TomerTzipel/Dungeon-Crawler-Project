@@ -18,7 +18,7 @@ namespace Elements
         //Empty:
         public const string EMPTY_EI = "  ";
         public const ConsoleColor OUTER_EMPTY_EBC = ConsoleColor.DarkBlue;
-        
+        public const ConsoleColor SHIP_EBC = ConsoleColor.DarkYellow;
         //Obstacles:
         public const string VERTICAL_WALL_EI = "||";
         public const string HORIZONTAL_WALL_EI = "==";
@@ -42,6 +42,13 @@ namespace Elements
         public const string SLIME3_EI = "O ";
         public const string SLIME2_EI = "o ";
         public const string SLIME1_EI = ". ";
+
+
+        public const string BASILISK_HEAD_EI = "00";
+        public const string BASILISK_BODY_EI = "XX";
+        public const string BASILISK_TAIL_EI = "YY";
+        public const ConsoleColor BASILISK_EFC = ConsoleColor.Green;
+
         //Walkables:
         public const string EXIT_EI = "EX";
         public const string ENTRY_EI = "ST";

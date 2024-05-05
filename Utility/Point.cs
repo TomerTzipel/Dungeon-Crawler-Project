@@ -51,7 +51,26 @@ namespace Utility
 
             return this;
         }
+        public Point MovePointInOppositeDirection(Direction direction)
+        {
+            switch (direction)
+            {
+                case Direction.Up:
+                    MovePointInDirection(Direction.Down);
+                    break;
+                case Direction.Down:
+                    MovePointInDirection(Direction.Up);
+                    break;
+                case Direction.Left:
+                    MovePointInDirection(Direction.Right);
+                    break;
+                case Direction.Right:
+                    MovePointInDirection(Direction.Left);
+                    break;
+            }
 
+            return this;
+        }
         public static float Distance(Point pointA,Point pointB)
         {
             float xDifference = pointB.X - pointA.X;

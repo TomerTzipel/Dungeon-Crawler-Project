@@ -56,7 +56,7 @@ namespace Utility
             {
                 movementResult = tickable.Tick(LevelManager.CurrentLevel.Map, interval);
 
-                if (!printFlag && movementResult)
+                if (!printFlag && (movementResult || Printer.ActionTextPrinter.DoesNeedReprint))
                 {
                     printFlag = true;
                 }

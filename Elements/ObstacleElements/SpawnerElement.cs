@@ -42,7 +42,7 @@ namespace Elements
                 return false;
             }
 
-            //change to a function that decides on the enemy to spawn
+            //FIX change to a function that decides on the enemy to spawn
             Bat bat = new Bat(spawnPosition);
             map.AddElement(bat, spawnPosition);
             EnemyManager.Instance.AddEnemy(bat);

@@ -36,7 +36,7 @@ namespace SceneSystem
             base.PrintScene();
 
             Console.SetCursorPosition(25, 0);
-            PlayerManager.PlayerElement.CombatEntity.PrintPlayerStats();
+            PlayerManager.CombatEntity.PrintPlayerStats();
         }
 
     }

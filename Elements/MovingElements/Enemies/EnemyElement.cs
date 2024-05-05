@@ -1,9 +1,4 @@
-﻿
-using System;
-using System.Diagnostics;
-using Utility;
-
-namespace Elements
+﻿namespace Elements
 {
     public abstract class EnemyElement : MovingElement, ITickable
     {
@@ -13,13 +8,11 @@ namespace Elements
 
         protected float _range;
 
+
+
         public CombatEntity CombatEntity { get; protected set; }
 
-        protected EnemyElement(Point position, string identifier) : base(position, identifier)
-        {
-            EnemyManager.Instance.AddEnemy(this);
-        }
-
+        protected EnemyElement(Point position, string identifier) : base(position, identifier) { }
 
         public EnemyElement(Point position, string identifier, CombatEntity combatEntity) : base(position, identifier) 
         {
@@ -58,7 +51,7 @@ namespace Elements
 
             if (distanceFromPlayer <= _range)
             {
-                ChooseDirectionsToPlayer(directions);
+                FindDirectionsToPlayer(directions);
             }
             else
             {
@@ -68,7 +61,7 @@ namespace Elements
             return ChooseDirection(directions);
         }
        
-        private Direction ChooseDirection(List<Direction> directions)
+        protected Direction ChooseDirection(List<Direction> directions)
         {
             int chosenDirectionIndex = RandomIndex(directions.Count);
             Direction chosenDirection = directions[chosenDirectionIndex];
@@ -76,7 +69,7 @@ namespace Elements
             return chosenDirection;
         }
 
-        private void ChooseDirectionsToPlayer(List<Direction> directions)
+        protected void FindDirectionsToPlayer(List<Direction> directions)
         {
             Point playerPosition = new Point (PlayerManager.PlayerElement.Position);
             
@@ -127,7 +120,7 @@ namespace Elements
             }
         }
 
-        public void GetAttacked(CombatEntity attacker, Map map)
+        public virtual void GetAttacked(CombatEntity attacker, Map map)
         {
             attacker.Attack(CombatEntity);
 
@@ -167,7 +160,7 @@ namespace Elements
             return base.CollideWith(collidor,map);
         }
 
-        private float DistanceToPlayer()
+        protected float DistanceToPlayer()
         {
             return Point.Distance(Position, PlayerManager.PlayerElement.Position);
         }

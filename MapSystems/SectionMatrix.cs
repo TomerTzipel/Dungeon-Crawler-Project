@@ -3,12 +3,18 @@ namespace MapSystems
 {
     public class SectionMatrix
     {
-        private readonly int _size;
+        protected readonly int _size;
         private readonly int _numberOfInnerSections;
 
-        public Section[,] Sections { get; private set; }
+        public Section[,] Sections { get; protected set; }
 
-        public Point StartSectionPosition { get; private set; }
+        public Point StartSectionPosition { get; protected set; }
+
+        protected SectionMatrix(int size) 
+        { 
+            _size = size;
+        }
+
 
         public SectionMatrix(int size,int numberOfInnerSectionsToGenerate)
         {
@@ -24,8 +30,7 @@ namespace MapSystems
                 GenerateAdjacentSections(StartSectionPosition, ref numberOfInnerSectionsGenerated);
             } while (numberOfInnerSectionsGenerated > numberOfInnerSectionsToGenerate);
 
-            GenerateOuterSections();
-            
+            GenerateOuterSections();      
         }
 
         public Section SectionAt(Point position)
@@ -52,6 +57,7 @@ namespace MapSystems
                 section.GenerateLayout(directionsOfEdges);
             }
 
+            //Case of Composition not fully used after first iteration
             bool wasLayoutGeneratedFromComposition = true;
             bool wasTakenFromComposition;
             while (!composition.IsEmpty() && wasLayoutGeneratedFromComposition)
@@ -77,7 +83,7 @@ namespace MapSystems
            
         }
 
-        private List<Direction> FindEdges(Section section)
+        protected List<Direction> FindEdges(Section section)
         {
             List<Direction> edgesFound = new List<Direction>(4);
 
@@ -100,7 +106,7 @@ namespace MapSystems
                     edgeFound = true;
                 }
 
-                if (!edgeFound && SectionAt(directionToCheckPosition).Type == SectionType.Outer)
+                if (!edgeFound && (SectionAt(directionToCheckPosition).Type == SectionType.Outer || SectionAt(directionToCheckPosition).Type == SectionType.ShipMid))
                 {
                     edgeFound = true;
                 }
@@ -115,7 +121,7 @@ namespace MapSystems
             return edgesFound;
         }
 
-        public void GenerateOuterSections()
+        protected void GenerateOuterSections()
         {
             for (int i = 0; i < _size; i++)
             {
@@ -129,7 +135,7 @@ namespace MapSystems
             }
         }
 
-        public void GenerateStartSection()
+        private void GenerateStartSection()
         {
             int x = RandomIndex(_size);
             int y = RandomIndex(_size);
@@ -137,7 +143,7 @@ namespace MapSystems
             GenerateSectionAt(StartSectionPosition, SectionType.Start);
         }
 
-        public void GenerateAdjacentSections(Point sectionPosition, ref int numberOfSectionsGenerated)
+        private void GenerateAdjacentSections(Point sectionPosition, ref int numberOfSectionsGenerated)
         {
             while (SectionAt(sectionPosition).Type != SectionType.Discontinue && numberOfSectionsGenerated < _numberOfInnerSections)
             {

@@ -47,6 +47,11 @@ namespace MapSystems
 
                     case SectionType.Exit:
                         return ConsoleColor.Green;
+
+                    case SectionType.ShipLeft:
+                    case SectionType.ShipMid:
+                    case SectionType.ShipRight:
+                        return ConsoleColor.DarkYellow;
                 }
 
                 return ConsoleColor.White;

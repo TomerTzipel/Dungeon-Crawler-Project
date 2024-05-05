@@ -149,7 +149,7 @@ namespace GameSystems
             }
 
             _hp -= calculatedDamage;
-
+            Debug.WriteLine(_hp);
             if (_hp < 0) _hp = 0;
 
             return calculatedDamage;

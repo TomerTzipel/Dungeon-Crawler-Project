@@ -63,7 +63,7 @@ namespace SceneSystem
 
             LevelLoop();
 
-            if (!PlayerManager.PlayerElement.CombatEntity.IsAlive)
+            if (!PlayerManager.CombatEntity.IsAlive)
             {
                 GameManager.FinishGame(false);
                 LevelManager.ExitLevel();
@@ -73,7 +73,7 @@ namespace SceneSystem
         private void LevelLoop()
         {
             while (LevelManager.IsLevelActive && 
-                   PlayerManager.PlayerElement.CombatEntity.IsAlive && 
+                   PlayerManager.CombatEntity.IsAlive && 
                    !GameManager.IsGamePaused)
             {
                 base.SceneLoop();
@@ -129,7 +129,7 @@ namespace SceneSystem
 
         private void DrinkPotion()
         {
-            PlayerManager.PlayerElement.CombatEntity.UsePotion();
+            PlayerManager.CombatEntity.UsePotion();
             Printer.PrintHUD();
             Printer.PrintActionText();
         }

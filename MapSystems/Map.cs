@@ -11,7 +11,7 @@ namespace MapSystems
 {
     public class Map
     {
-        public SectionMatrix SectionsMatrix { get; private set; }
+        public SectionMatrix SectionsMatrix { get; protected set; }
 
         private static readonly object _dataLock = new object();
 
@@ -63,7 +63,7 @@ namespace MapSystems
             }
         }
 
-        public void GenerateMapFromSections()
+        protected void GenerateMapFromSections()
         {
             foreach (Section section in SectionsMatrix.Sections) 
             {
@@ -84,13 +84,14 @@ namespace MapSystems
                 }
             }
         }
+
         protected void GenerateSections(int numberOfSectionsToGenerate, int size, MapComposition mapComposition)
         {
             SectionsMatrix = new SectionMatrix(size, numberOfSectionsToGenerate);
             SectionsMatrix.GenerateSectionsLayout(mapComposition);
         }
 
-        public void LocalizePlayer(PlayerElement player)
+        protected void LocalizePlayer(PlayerElement player)
         {
             int sectionSize = Section.Size;
             Point startPosition = new Point(SectionsMatrix.StartSectionPosition.X * sectionSize, SectionsMatrix.StartSectionPosition.Y * sectionSize);

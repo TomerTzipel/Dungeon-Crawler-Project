@@ -5,7 +5,7 @@ namespace SceneSystem
     public class MainMenuScene : SelectionMenuScene
     {
         
-        public MainMenuScene() : base(4,"SLAY THE KRAKEN",ConsoleColor.DarkBlue) 
+        public MainMenuScene() : base(4,"SLAY THE BASILISK",ConsoleColor.DarkBlue) 
         {
             _buttons[0] = new StartGameButton();
             _buttons[1] = new ReturnToGameButton("Continue Game");

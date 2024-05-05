@@ -96,8 +96,13 @@ namespace GameSystems
         private static bool NewLevel()
         {
             CurrentLevelValue++;
+            if (CurrentLevelValue == 10)
+            {
+                CurrentLevel = new BossLevel(PlayerManager.PlayerElement);
+                return true;
+            }
 
-            if (CurrentLevelValue == 10) return false;
+            if (CurrentLevelValue == 11) return false;
 
             int levelSize = _levelSizes[CurrentLevelValue];
             int levelNumberOfSections = _levelNumberOfSections[CurrentLevelValue];

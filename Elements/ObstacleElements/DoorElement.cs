@@ -5,7 +5,7 @@ namespace Elements
     {
         public DoorElement() :base(DOOR_EI) { }
 
-        private bool _isOpened = false;
+        protected bool _isOpened = false;
 
         public override bool HitBy(MovingElement element)
         {

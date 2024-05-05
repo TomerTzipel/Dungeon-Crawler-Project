@@ -17,7 +17,7 @@ namespace GameSystems
        
 
         private const int ACTION_TEXT_MAX_LINES = 10;
-        private static ActionTextPrinter _actionTextPrinter;
+        public static ActionTextPrinter ActionTextPrinter { get; private set; }
 
         public static Camera Camera { get; private set; }
 
@@ -54,9 +54,9 @@ namespace GameSystems
                 Console.SetCursorPosition(0, 0);
                 LevelManager.CurrentLevel.PrintLevel();
 
-                if (PlayerManager.PlayerElement.CombatEntity.DoesHUDNeedReprint) PrintHUD();
+                if (PlayerManager.CombatEntity.DoesHUDNeedReprint) PrintHUD();
 
-                if (_actionTextPrinter.DoesNeedReprint) PrintActionText();
+                if (ActionTextPrinter.DoesNeedReprint) PrintActionText();
 
             }
 
@@ -97,6 +97,7 @@ namespace GameSystems
             }
 
         }
+
         public static void PrintActionText()
         {
             lock (_printerLock)
@@ -104,7 +105,7 @@ namespace GameSystems
                 //SetPrinterPosition();
                 Console.SetCursorPosition(0, 5 + CAMERA_HEIGHT + 1);
                 ColorReset();
-                _actionTextPrinter.Print();
+                ActionTextPrinter.Print();
                 ColorReset(); 
             }
         }
@@ -112,7 +113,7 @@ namespace GameSystems
         public static void AddActionText(ActionTextType type,string text)
         {
             ActionText line = new ActionText(type, text);
-            _actionTextPrinter.AddLine(line);
+            ActionTextPrinter.AddLine(line);
         }
 
         public static void ColorReset()
@@ -169,7 +170,7 @@ namespace GameSystems
 
         public static void ResetActionTextPrinter()
         {
-            _actionTextPrinter = new ActionTextPrinter(ACTION_TEXT_MAX_LINES);
+            ActionTextPrinter = new ActionTextPrinter(ACTION_TEXT_MAX_LINES);
         }
     }
 

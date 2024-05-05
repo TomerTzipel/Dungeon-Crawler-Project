@@ -11,12 +11,15 @@ namespace GameSystems
         
         private MiniMap _miniMap;
 
-        public Map Map { get; private set; }
+        public Map Map { get; protected set; }
         
         public Puzzle Puzzle { get; private set; }
         public PuzzleType PuzzleType { get; private set; }
         public bool IsPuzzleActive { get; private set; } = false;
 
+       
+        protected Level() { }
+ 
         public Level(int matrixSectionSize, int numberOfSections,MapComposition mapComposition, PlayerElement player)
         {
             GenerateMapLayout(numberOfSections, matrixSectionSize, mapComposition, player);
@@ -28,7 +31,7 @@ namespace GameSystems
             Map = new Map(numberOfSectionsToGenerate, matrixSectionSize, mapComposition,player);
            
         }
-        private void GenerateMiniMap(SectionMatrix sectionMatrix , int size)
+        protected void GenerateMiniMap(SectionMatrix sectionMatrix , int size)
         {
             _miniMap = new MiniMap(sectionMatrix, size);
         }
@@ -73,7 +76,7 @@ namespace GameSystems
 
         public void PrintHUD()
         {
-            PlayerManager.PlayerElement.CombatEntity.PrintPlayerStatus();
+            PlayerManager.CombatEntity.PrintPlayerStatus();
         }
 
         public void MovePlayer(PlayerElement player,Direction direction)
