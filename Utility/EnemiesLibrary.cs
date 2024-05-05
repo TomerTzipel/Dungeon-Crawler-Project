@@ -46,6 +46,8 @@ namespace Utility
         public const int BAT_RANGE = 3;
 
         //SLIME STATS
+        public const int STARTING_SLIME_SIZE = 3;
+
         public const int SLIME_ACCURACY = 100;
         public const int SLIME_ARMOR = 0;
         public const int SLIME_RANGE = 4;
@@ -65,6 +67,7 @@ namespace Utility
         public const int SLIME3_HP = 30;
         public const int SLIME3_EVASION = 10;
         public const int SLIME3_MULTIHIT = 0;
+
 
         //OGRE STATS
         public const int OGRE_HP = 100;

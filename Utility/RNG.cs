@@ -15,9 +15,9 @@ namespace Utility
         }
 
         
-        public static int RandomIndex(int range)
+        public static int RandomIndex(int length)
         {
-            return numberGenerator.Next(0, range);
+            return numberGenerator.Next(0, length);
         }
 
         public static int RandomRange(int min, int max)

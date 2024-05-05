@@ -3,6 +3,9 @@ namespace SceneSystem
 {
     public class InventoryScene : Scene
     {
+
+        private static int _buttonsMargin = 30;
+
         private readonly ConsoleColor _titlesColor = ConsoleColor.Yellow;
 
         private ItemButton[] _equippedItemsShowcase = new ItemButton[6];
@@ -173,7 +176,7 @@ namespace SceneSystem
                 currentButton.Print();
                 Printer.ColorReset();
 
-                cursorColumn += 25;
+                cursorColumn += _buttonsMargin;
                 Console.SetCursorPosition(cursorColumn, cursorRow);
                //Printer.SetPrinterPosition(cursorColumn, cursorRow);
             }
@@ -197,7 +200,7 @@ namespace SceneSystem
                     currentButton.Print();
                     Printer.ColorReset();
 
-                    cursorColumn += 25;
+                    cursorColumn += _buttonsMargin;
                     Console.SetCursorPosition(cursorColumn, cursorRow);
                     //Printer.SetPrinterPosition(cursorColumn, cursorRow);
                 }
@@ -224,7 +227,7 @@ namespace SceneSystem
                 //Printer.SetPrinterPosition(cursorColumn, cursorRow + 1);
                 trinket.PrintBuffs();
 
-                cursorColumn += 25;
+                cursorColumn += _buttonsMargin;
                 Console.SetCursorPosition(cursorColumn, cursorRow);
                 //Printer.SetPrinterPosition(cursorColumn, cursorRow);
 

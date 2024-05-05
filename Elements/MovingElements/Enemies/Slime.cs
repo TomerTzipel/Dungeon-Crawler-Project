@@ -18,15 +18,15 @@ namespace Elements
 
             switch (size)
             {
-                case 3:
+                case STARTING_SLIME_SIZE:
                     Identifier = SLIME3_EI;
                     CombatEntity = new CombatEntity(SLIME3_HP, SLIME3_DAMAGE, SLIME3_EVASION, SLIME_ACCURACY, SLIME3_MULTIHIT,SLIME_ARMOR,SLIME_PIERCE);
                     break;
-                case 2:
+                case STARTING_SLIME_SIZE-1:
                     Identifier = SLIME2_EI;
                     CombatEntity = new CombatEntity(SLIME2_HP, SLIME2_DAMAGE, SLIME2_EVASION, SLIME_ACCURACY, SLIME2_MULTIHIT, SLIME_ARMOR, SLIME_PIERCE);
                     break;
-                case 1:
+                case STARTING_SLIME_SIZE - 2:
                     Identifier = SLIME1_EI;
                     CombatEntity = new CombatEntity(SLIME1_HP, SLIME1_DAMAGE, SLIME1_EVASION, SLIME_ACCURACY, SLIME1_MULTIHIT, SLIME_ARMOR, SLIME_PIERCE);
                     break;
@@ -52,7 +52,7 @@ namespace Elements
                 map.AddElement(EmptyElement.InnerInstance, Position);
             }
 
-            if(_size == 3)
+            if(_size == STARTING_SLIME_SIZE)
             {
                 LootManager.GenerateLoot(LootOrigin.Slime);
             }
@@ -61,7 +61,7 @@ namespace Elements
 
         private void Split(Map map)
         {
-            if(_size - 1 == 0)
+            if(_size - 1 == STARTING_SLIME_SIZE - 3)
             {
                 return;
             }

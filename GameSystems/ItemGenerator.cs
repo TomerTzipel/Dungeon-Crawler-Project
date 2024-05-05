@@ -33,43 +33,7 @@ namespace GameSystems
 
         private static string GenerateName(ItemType type)
         {
-            //FIX item names
-            string name = "ITEM";
-
-            switch (type)
-            {
-                case ItemType.Head:
-
-                    break;
-
-                case ItemType.Body:
-
-                    break;
-
-                case ItemType.Legs:
-
-                    break;
-
-                case ItemType.Arms:
-
-                    break;
-
-                case ItemType.Ring:
-
-                    break;
-
-                case ItemType.Necklace:
-
-                    break;
-
-                case ItemType.Trinket:
-
-                    break;
-
-
-            }
-
-            return name;
+            return ItemNameGenerator.GenerateItemTitle(type);
         }
 
         private static List<Buff> GenerateBuffsByLevel()

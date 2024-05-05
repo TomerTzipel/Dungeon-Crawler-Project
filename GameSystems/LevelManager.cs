@@ -127,6 +127,7 @@ namespace GameSystems
 
         public static void ResetLevelValue()
         {
+            //Change this to 9 to see the boss fight
             CurrentLevelValue = -1;
         }
 

@@ -7,8 +7,8 @@ namespace Elements
     public class SpawnerElement : DestroyableElement, ITickable
     {
 
-        private float _spawnRate = 10f;
-        private float _spawnCounter = 0;
+        private float _spawnRate = 20f;
+        private float _spawnCounter = 15f;
 
         private Point _position;
  
@@ -26,7 +26,7 @@ namespace Elements
 
             if (_spawnCounter >= _spawnRate) 
             {
-               _spawnCounter = 0;
+               _spawnCounter = 0f;
                return Spawn(map);
             }
 
@@ -42,12 +42,39 @@ namespace Elements
                 return false;
             }
 
-            //FIX change to a function that decides on the enemy to spawn
-            Bat bat = new Bat(spawnPosition);
-            map.AddElement(bat, spawnPosition);
-            EnemyManager.Instance.AddEnemy(bat);
+            EnemyElement enemy = ChooseEnemyToSpawn(spawnPosition);
+            
+            map.AddElement(enemy, spawnPosition);
+            EnemyManager.Instance.AddEnemy(enemy);
 
             return true;
+        }
+
+        private EnemyElement ChooseEnemyToSpawn(Point spawnPosition)
+        {
+
+            int chosenEnemy = RandomIndex(3);
+            EnemyType enemyType= (EnemyType)chosenEnemy;
+
+            EnemyElement enemyToSpawn = null;
+
+            switch (enemyType)
+            {
+                case EnemyType.Bat:
+                    enemyToSpawn = new Bat(spawnPosition);
+                    break;
+
+                case EnemyType.Slime:
+                    enemyToSpawn = new Slime(spawnPosition, STARTING_SLIME_SIZE);
+                    break;
+
+                case EnemyType.Ogre:
+                    enemyToSpawn = new Ogre(spawnPosition);
+                    break;
+            }
+
+            return enemyToSpawn;
+
         }
 
         private Point FindAvailableSpawnPosition(Map map)
