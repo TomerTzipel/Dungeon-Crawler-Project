@@ -3,7 +3,7 @@ namespace SceneSystem
 {
     public enum InputType
     {
-        Movement, MenuMovement, Sudoku, SudokuEdit, SceneChange, ButtonClick, Potion ,Error
+        Movement, MenuMovement, Sudoku, SudokuEdit, SceneChange, ButtonClick, Potion, Chess ,Error
     }
     public abstract class InputManager
     {

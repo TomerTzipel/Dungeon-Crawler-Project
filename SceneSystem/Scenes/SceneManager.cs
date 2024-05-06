@@ -4,13 +4,13 @@ namespace SceneSystem
 {
     public enum SceneType
     {
-        MainMenu, Game, Inventory, GameOver, PauseMenu, Puzzle, SudokuPuzzle, Shop, Settings,
+        MainMenu, Game, Inventory, GameOver, PauseMenu, Puzzle, SudokuPuzzle, Shop, Settings, ChessPuzzle,
         ExitGame
         
     }
     public static class SceneManager
     {
-        private static Scene[] _scenes = new Scene[9];
+        private static Scene[] _scenes = new Scene[10];
 
         private static SceneType _currentScene = SceneType.MainMenu;
 
@@ -26,6 +26,7 @@ namespace SceneSystem
             _scenes[(int)SceneType.SudokuPuzzle] = new SudokuScene();
             _scenes[(int)SceneType.Shop] = new ShopScene();
             _scenes[(int)SceneType.Settings] = new SettingsScene();
+            _scenes[(int)SceneType.ChessPuzzle] = new ChessScene();
         }
 
         public static void RunGame()

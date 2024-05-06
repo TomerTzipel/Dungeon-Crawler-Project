@@ -58,7 +58,6 @@ namespace Utility
         private static readonly DecorationType[][] _forests = [
         [DecorationType.Tree,
             DecorationType.Tree,
-            DecorationType.Tree,
             DecorationType.Bush,
             DecorationType.Grass,
             DecorationType.Grass,
@@ -78,8 +77,6 @@ namespace Utility
         [DecorationType.Vase,
             DecorationType.Vase,
             DecorationType.VWall,
-            DecorationType.VWall,
-            DecorationType.HWall,
             DecorationType.HWall,
             DecorationType.Boulder],
 
@@ -87,8 +84,6 @@ namespace Utility
             DecorationType.Vase,
             DecorationType.Vase,
             DecorationType.VWall,
-            DecorationType.VWall,
-            DecorationType.HWall,
             DecorationType.HWall,
             DecorationType.Pebble,
             DecorationType.Pebble],

@@ -27,6 +27,9 @@ namespace Elements
             
         }
 
-
+        public void ResetIdentifier()
+        {
+            Identifier = PUZZLE_SOLVER_EI;
+        }
     }
 }

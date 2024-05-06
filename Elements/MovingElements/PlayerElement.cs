@@ -88,7 +88,7 @@ namespace Elements
 
         public override bool CollideWith(Element collidor, Map map)
         {
-            if (collidor is VaseElement || collidor is BoulderElement || collidor is BushElement)
+            if (collidor is VaseElement || collidor is BoulderElement || collidor is BushElement || collidor is SpawnerElement)
             {
                 AttackAnimation();
                 return false;

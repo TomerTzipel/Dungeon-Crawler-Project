@@ -79,6 +79,11 @@ namespace Utility
             return MathF.Sqrt(squaresSum);
         }
 
+        public static bool Equals(Point p1, Point p2)
+        {
+            return (p1.X == p2.X && p1.Y == p2.Y);
+        }
+
         public override string ToString() 
         {
             return $"(X:{X},Y:{Y})";

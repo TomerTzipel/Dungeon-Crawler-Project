@@ -44,6 +44,15 @@ namespace GameSystems
         {
             SceneManager.ChangeScene(SceneType.GameOver);
             GameResult = result;
+
+            if (GameResult)
+            {
+                AudioManager.Play(AudioType.GameWin);
+            }
+            else
+            {
+                AudioManager.Play(AudioType.GameLose);
+            }
         }
       
 

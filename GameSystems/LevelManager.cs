@@ -76,9 +76,8 @@ namespace GameSystems
 
         public static void LoadRandomPuzzle()
         {
-            Puzzle puzzle = new SudokuPuzzle();
-            CurrentLevel.ActivatePuzzle(puzzle, PuzzleType.Sudoku);
-            
+            Puzzle puzzle = new ChessPuzzle();
+            CurrentLevel.ActivatePuzzle(puzzle, PuzzleType.Chess);
         }
 
         public static bool SetUpLevel()

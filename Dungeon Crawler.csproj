@@ -10,7 +10,6 @@
 
   <ItemGroup>
     <Folder Include="Puzzles\BreakingFloor\" />
-    <Folder Include="Puzzles\Chess\" />
   </ItemGroup>
 
 </Project>

@@ -24,7 +24,7 @@ namespace SceneSystem
                     SceneManager.ChangeScene(SceneType.SudokuPuzzle);
                     return;
                 case PuzzleType.Chess:
-                    SceneManager.ChangeScene(SceneType.SudokuPuzzle);
+                    SceneManager.ChangeScene(SceneType.ChessPuzzle);
                     return;
                 case PuzzleType.BreakingFloor:
                     SceneManager.ChangeScene(SceneType.SudokuPuzzle);

@@ -83,7 +83,7 @@ namespace Utility
         public const int OGRE_RANGE = 5;
 
         //BASILISK STATS
-        public const int BASILISK_HP = 800;
+        public const int BASILISK_HP = 1;
         public const int BASILISK_ARMOR = 20;
 
         public const int BASILISK_DAMAGE = 80;

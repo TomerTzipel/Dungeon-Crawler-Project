@@ -56,12 +56,12 @@ namespace Elements
         //Walkables:
         public const string EXIT_EI = "EX";
         public const string ENTRY_EI = "ST";
-        public const string PUZZLE_EI = "PZ";
+        public const string PUZZLE_EI = "PZ"; public const ConsoleColor PUZZLE_EFC = ConsoleColor.DarkMagenta;
         public const string TRAP_EI = "TR"; 
        
 
         //Puzzles related:
-        public const string PUZZLE_SOLVER_EI = "I"; public const ConsoleColor PUZZLE_SOLVER_EFC = ConsoleColor.Yellow;
+        public const string PUZZLE_SOLVER_EI = "I"; public const ConsoleColor PUZZLE_SOLVER_EFC = ConsoleColor.Cyan;
         public const ConsoleColor GIVEN_NUMBER_EFC = ConsoleColor.Green;
         public const ConsoleColor MISSING_NUMBER_EFC = ConsoleColor.White;
         public const ConsoleColor ERRONEOUS_EBC = ConsoleColor.DarkRed;

@@ -45,8 +45,7 @@ namespace Elements
             EnemyElement enemy = ChooseEnemyToSpawn(spawnPosition);
             
             map.AddElement(enemy, spawnPosition);
-            EnemyManager.Instance.AddEnemy(enemy);
-
+            AudioManager.Play(AudioType.Spawn);
             return true;
         }
 
