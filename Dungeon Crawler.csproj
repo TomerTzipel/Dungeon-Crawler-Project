@@ -9,7 +9,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Puzzles\BreakingFloor\" />
+    <Compile Remove="Puzzles\BreakingFloor\**" />
+    <EmbeddedResource Remove="Puzzles\BreakingFloor\**" />
+    <None Remove="Puzzles\BreakingFloor\**" />
   </ItemGroup>
 
 </Project>
