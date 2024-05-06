@@ -70,7 +70,6 @@ namespace InventorySystem
                 Buff buff = Buffs[i];
                 Console.WriteLine(buff);
                 Console.SetCursorPosition(cursorColumn, cursorRow + i + 1);
-                //Printer.SetPrinterPosition(cursorColumn, cursorRow + 1);
             }
         }
 

@@ -325,51 +325,5 @@ namespace MapSystems
             SectionAt(position).Mark(type);
         }
 
-        public void Print()
-        {
-            Console.SetCursorPosition((Printer.CAMERA_WIDTH * 2) + 1, 0);
-            //Printer.SetPrinterPosition((Printer.CAMERA_WIDTH * 2) + 1, 5);
-            for (int i = 0; i < _size; i++)
-            {
-                for (int j = 0; j < _size; j++)
-                {
-                    SectionType type = Sections[i,j].Type;
-                    switch (type)
-                    {
-                        case SectionType.Outer:
-                            Console.BackgroundColor = ConsoleColor.Blue;
-                            Console.Write("  ");
-                            continue;
-
-                        case SectionType.Start:
-                            Console.BackgroundColor = ConsoleColor.Green;
-                            Console.Write("  ");
-                            continue;
-
-                        case SectionType.Exit:
-                            Console.BackgroundColor = ConsoleColor.Red;
-                            Console.Write("  ");
-                            continue;
-
-                        case SectionType.Inner:
-                            Console.BackgroundColor = ConsoleColor.Magenta;
-                            Console.Write("  ");
-                            continue;
-
-                        case SectionType.Enemy:
-                            Console.BackgroundColor = ConsoleColor.Yellow;
-                            Console.Write("  ");
-                            continue;
-                    }
-                  
-                    Console.BackgroundColor = ConsoleColor.Gray;
-                    Console.Write("  ");
-
-                }
-                Console.SetCursorPosition((Printer.CAMERA_WIDTH * 2) + 1,  i + 1);
-                //Printer.SetPrinterPosition((Printer.CAMERA_WIDTH * 2) + 1, 5 + i);
-            }
-        }
-
     }
 }

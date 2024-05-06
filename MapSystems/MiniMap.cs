@@ -71,7 +71,6 @@ namespace MapSystems
                 for (int j = 0; j < _size; j++)
                 {
                     Sections[i, j].Print();
-                    //Reset color unless doing a color check
                     Printer.ColorReset();
                 }
                 Console.SetCursorPosition((Printer.CAMERA_WIDTH * 2) + 1, i + 1);

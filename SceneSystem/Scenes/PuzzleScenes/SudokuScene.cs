@@ -86,6 +86,7 @@ namespace SceneSystem
             bool wasSolved = puzzle.InputValueAtSolver(value, true);
             if (wasSolved)
             {
+                AudioManager.Play(AudioType.PuzzleSolved);
                 Printer.AddActionText(ActionTextType.Item,"A reward for solving the sudoku:");
                 LootManager.RewardTrinket();
                 level.DeActivatePuzzle();

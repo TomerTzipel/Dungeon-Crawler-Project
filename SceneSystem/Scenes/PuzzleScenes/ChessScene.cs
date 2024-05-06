@@ -105,7 +105,8 @@ namespace SceneSystem
 
             if (result)
             {
-                Printer.AddActionText(ActionTextType.Item, "A reward for solving the sudoku:");
+                AudioManager.Play(AudioType.PuzzleSolved);
+                Printer.AddActionText(ActionTextType.Item, "A reward for finding the checkmate:");
                 LootManager.RewardTrinket();
                 level.DeActivatePuzzle();
             }

@@ -83,7 +83,7 @@ namespace Utility
         public const int OGRE_RANGE = 5;
 
         //BASILISK STATS
-        public const int BASILISK_HP = 1;
+        public const int BASILISK_HP = 800;
         public const int BASILISK_ARMOR = 20;
 
         public const int BASILISK_DAMAGE = 80;
@@ -100,7 +100,7 @@ namespace Utility
             {
                 switch (LevelManager.CurrentDifficulty)
                 {
-                    case Difficulty.Medium:
+                    case Difficulty.Normal:
                         return 1.25f;
                     case Difficulty.Hard:
                         return 1.5f;
@@ -125,7 +125,7 @@ namespace Utility
                     chosenEnemies = RandomIndex(_easyEncounter.Length);
                     return _easyEncounter[chosenEnemies];
 
-                case Difficulty.Medium:
+                case Difficulty.Normal:
                     chosenEnemies = RandomIndex(_mediumEncounter.Length);
                     return _mediumEncounter[chosenEnemies];
 

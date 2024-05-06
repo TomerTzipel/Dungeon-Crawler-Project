@@ -9,13 +9,13 @@ namespace Elements
 {
     public class PlayerElement : MovingElement
     {
-        private const int MAX_HP = 1000;
+        private const int MAX_HP = 300;
         private const int DAMAGE = 30;
-        private const int EVASION = 20;
-        private const int ACCURACY = 100;
+        private const int EVASION = 10;
+        private const int ACCURACY = 85;
         private const int MULTI_HIT = 10; 
         private const int ARMOR = 5;
-        private const int PIERCE = 10;
+        private const int PIERCE = 5;
 
         public bool DidEnterExit { get; set; } = false;
 
@@ -88,9 +88,12 @@ namespace Elements
 
         public override bool CollideWith(Element collidor, Map map)
         {
+            
+
             if (collidor is VaseElement || collidor is BoulderElement || collidor is BushElement || collidor is SpawnerElement)
             {
                 AttackAnimation();
+                AudioManager.Play(AudioType.DestroyableHit);
                 return false;
             }
 
@@ -98,12 +101,18 @@ namespace Elements
             {
                 enemy.GetAttacked(CombatEntity,map);
 
+                AudioManager.Play(AudioType.Attack);
                 AttackAnimation();
 
                 if (!enemy.CombatEntity.IsAlive)
                 {
                     return true;
                 }
+            }
+
+            if (collidor is ObstacleElement && !(collidor is DestroyableElement))
+            {
+                AudioManager.Play(AudioType.ObstacleHit);
             }
 
             return base.CollideWith(collidor, map);

@@ -5,7 +5,6 @@ using System.Diagnostics;
 
 namespace GameSystems
 {
-    //need to seperate MovingElement from PlayerManager
     public static class PlayerManager
     {
         public static bool IsPlayerInit { get; private set; } = false;

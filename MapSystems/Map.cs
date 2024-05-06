@@ -106,11 +106,6 @@ namespace MapSystems
             AddElement(player, startPosition);
         }
 
-        public void PrintMiniMap()
-        {
-            SectionsMatrix.Print();
-        }
-       
         public void PrintToCamera(Camera camera)
         {
             lock (_dataLock)
@@ -148,6 +143,7 @@ namespace MapSystems
             {
                 //This if statement isn't nesseccery as the bug that caused me to write it was fixed.
                 //Though it is better to keep it in case a new bug creates the same bug of ghost enemies.
+                //Future Me: Can confirm it was smart to keep
                 if (ElementAt(element.Position) != element){
                     Debug.WriteLine("Ghost");
                     return false;
@@ -208,7 +204,11 @@ namespace MapSystems
                     return true;
                 }
 
-                //Obstacle Case - which is do nothing for now
+                if (ElementAt(newPosition) is ObstacleElement obstacleElement && !(ElementAt(newPosition) is DestroyableElement))
+                {
+                    element.CollideWith(obstacleElement, this);
+                }
+
                 return false;
             }
         }

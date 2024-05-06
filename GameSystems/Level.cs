@@ -50,7 +50,6 @@ namespace GameSystems
 
         public void PrintCameraAndMiniMap()
         {
-            //Printer.SetPrinterPosition(0, 5);
             Console.SetCursorPosition(0, 5);
             Map.PrintToCamera(Printer.Camera);
 

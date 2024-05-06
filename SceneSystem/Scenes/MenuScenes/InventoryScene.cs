@@ -178,7 +178,6 @@ namespace SceneSystem
 
                 cursorColumn += _buttonsMargin;
                 Console.SetCursorPosition(cursorColumn, cursorRow);
-               //Printer.SetPrinterPosition(cursorColumn, cursorRow);
             }
         }
         private void PrintEquipableItemsShowcase()
@@ -202,7 +201,6 @@ namespace SceneSystem
 
                     cursorColumn += _buttonsMargin;
                     Console.SetCursorPosition(cursorColumn, cursorRow);
-                    //Printer.SetPrinterPosition(cursorColumn, cursorRow);
                 }
                 cursorColumn = 0;
                 Console.WriteLine(); Console.WriteLine();
@@ -224,12 +222,10 @@ namespace SceneSystem
                 Console.WriteLine(trinket);
 
                 Console.SetCursorPosition(cursorColumn, cursorRow + 1);
-                //Printer.SetPrinterPosition(cursorColumn, cursorRow + 1);
                 trinket.PrintBuffs();
 
                 cursorColumn += _buttonsMargin;
                 Console.SetCursorPosition(cursorColumn, cursorRow);
-                //Printer.SetPrinterPosition(cursorColumn, cursorRow);
 
                 count++;
 

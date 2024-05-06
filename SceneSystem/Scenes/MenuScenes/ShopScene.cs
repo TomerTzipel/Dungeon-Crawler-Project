@@ -22,6 +22,7 @@ namespace SceneSystem
 
         private void GenerateShop()
         {
+            AudioManager.Play(AudioType.ShopOpen);
             _buttons[0] = new ShopButton(50,LootType.Key, null);
             _buttons[1] = new ShopButton(70, LootType.Potion, null);
             _buttons[2] = new ExitShopButton();

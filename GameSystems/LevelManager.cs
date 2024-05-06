@@ -7,7 +7,7 @@ namespace GameSystems
 
     public enum Difficulty
     {
-        Easy, Medium, Hard, Dynamic
+        Easy, Normal, Hard, Dynamic
     }
 
     public static class LevelManager
@@ -67,7 +67,7 @@ namespace GameSystems
                     case 5:
                     case 6:
                     case 7:
-                        return Difficulty.Medium;
+                        return Difficulty.Normal;
                 }
 
                 return Difficulty.Hard;
@@ -76,8 +76,20 @@ namespace GameSystems
 
         public static void LoadRandomPuzzle()
         {
-            Puzzle puzzle = new ChessPuzzle();
-            CurrentLevel.ActivatePuzzle(puzzle, PuzzleType.Chess);
+            int chosenPuzzle = RandomIndex(2);
+            PuzzleType type = (PuzzleType)chosenPuzzle;
+            Puzzle puzzle;
+
+            if (type == PuzzleType.Chess)
+            {
+                puzzle = new ChessPuzzle();
+                CurrentLevel.ActivatePuzzle(puzzle, PuzzleType.Chess);
+                return;
+            }
+
+            puzzle = new SudokuPuzzle();
+            CurrentLevel.ActivatePuzzle(puzzle, PuzzleType.Sudoku);
+
         }
 
         public static bool SetUpLevel()
@@ -125,7 +137,7 @@ namespace GameSystems
 
         public static void ResetLevelValue()
         {
-            //Change this to 9 to see the boss fight
+            //Change this to 9 to see the boss fight, -1 for normal
             CurrentLevelValue = -1;
         }
 

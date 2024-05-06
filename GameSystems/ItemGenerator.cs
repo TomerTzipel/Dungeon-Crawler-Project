@@ -79,7 +79,7 @@ namespace GameSystems
                     value = GenerateEasyBuffValue(stat, type);
                     break;
 
-                case Difficulty.Medium:
+                case Difficulty.Normal:
                     value = GenerateMediumBuffValue(stat, type);
                     break;
 

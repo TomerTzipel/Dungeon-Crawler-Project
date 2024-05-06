@@ -23,7 +23,7 @@ namespace SceneSystem
             
             _buttons[0] = new DifficultyButton(Difficulty.Dynamic);
             _buttons[1] = new DifficultyButton(Difficulty.Easy);
-            _buttons[2] = new DifficultyButton(Difficulty.Medium);
+            _buttons[2] = new DifficultyButton(Difficulty.Normal);
             _buttons[3] = new DifficultyButton(Difficulty.Hard);
             
 

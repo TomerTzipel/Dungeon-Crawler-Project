@@ -28,7 +28,6 @@ namespace GameSystems
         {
             Camera = new Camera(CAMERA_WIDTH,CAMERA_HEIGHT);
 
-            //Console.BufferWidth = 5000;
             ResetActionTextPrinter();
             Console.CursorVisible = false;
             Clear();
@@ -38,7 +37,6 @@ namespace GameSystems
         {
             lock (_printerLock)
             {
-                //SetPrinterPosition();
                 Console.SetCursorPosition(0, 0);
                 scene.PrintScene();
             }
@@ -50,7 +48,6 @@ namespace GameSystems
 
             lock (_printerLock)
             {
-                //SetPrinterPosition();
                 Console.SetCursorPosition(0, 0);
                 LevelManager.CurrentLevel.PrintLevel();
 
@@ -90,7 +87,6 @@ namespace GameSystems
         {
             lock (_printerLock)
             {
-                //SetPrinterPosition();
                 Console.SetCursorPosition(0, 0); 
                 ColorReset();
                 LevelManager.CurrentLevel.PrintHUD();
@@ -102,7 +98,6 @@ namespace GameSystems
         {
             lock (_printerLock)
             {
-                //SetPrinterPosition();
                 Console.SetCursorPosition(0, 5 + CAMERA_HEIGHT + 1);
                 ColorReset();
                 ActionTextPrinter.Print();
@@ -156,11 +151,6 @@ namespace GameSystems
                 _currentBackground = element.Background;
                 Console.BackgroundColor = _currentBackground;
             }
-        }
-
-        public static void SetPrinterPosition()
-        {
-            SetPrinterPosition(0,0);
         }
 
         public static void SetPrinterPosition(int row, int column)

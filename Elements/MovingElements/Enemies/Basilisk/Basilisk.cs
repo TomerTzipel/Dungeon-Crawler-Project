@@ -74,6 +74,8 @@ namespace Elements
         {
             GateElement.Instance.Open();
 
+            AudioManager.Play(AudioType.BossKill);
+
             foreach (var segment in segments)
             {
                 segment.OnBasiliskDeath(map);
