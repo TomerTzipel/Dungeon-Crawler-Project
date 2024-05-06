@@ -1,5 +1,7 @@
 Slay the Basilisk
 
+!!!Play with console on full screen and even zoom out within the console especially on shop and inventory!!!! (if the cursor apears for some reason just rerun while not closing the console)
+
 Movement/Menu Navigation = WASD or Arrows
 
 Combat is done by movement
