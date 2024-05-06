@@ -1,7 +1,7 @@
 ﻿
 
 
-namespace MapSystems
+namespace MapSystem
 {
     public enum SectionType
     {
@@ -242,12 +242,12 @@ namespace MapSystems
 
         private void GenerateExitLayout()
         {
-            SectionLayout[Size / 2, Size / 2] = new ExitElement();
+            SectionLayout[Size / 2, Size / 2] = new Exit();
         }
 
         private void GenerateNormalPuzzleLayout()
         {
-            SectionLayout[Size / 2, Size / 2] = new PuzzleTeleportElement();
+            SectionLayout[Size / 2, Size / 2] = new PuzzleTeleport();
             List<Direction> directions = [Direction.Up, Direction.Down, Direction.Left, Direction.Right];
             GenerateEdges(directions);
             GenerateDoors();
@@ -255,7 +255,7 @@ namespace MapSystems
         }
         private void GenerateEdgePuzzleLayout()
         {
-            SectionLayout[Size / 2, Size / 2] = new PuzzleTeleportElement();
+            SectionLayout[Size / 2, Size / 2] = new PuzzleTeleport();
         }
 
         private void GenerateInnerLayout(bool spawnEnemies)
@@ -323,7 +323,7 @@ namespace MapSystems
                 switch (type)
                 {
                     case DecorationType.Boulder:
-                        element = new BoulderElement();
+                        element = new Boulder();
                         break;
 
                     case DecorationType.Tree:
@@ -335,15 +335,15 @@ namespace MapSystems
                         break;
 
                     case DecorationType.Pebble:
-                        element = new PebbleElement();
+                        element = new Pebble();
                         break;
 
                     case DecorationType.Vase:
-                        element = new VaseElement();
+                        element = new Vase();
                         break;
 
                     case DecorationType.Bush:
-                        element = new BushElement();
+                        element = new Bush();
                         break;
 
                     case DecorationType.VWall:
@@ -367,13 +367,13 @@ namespace MapSystems
         {
             Point spawnerPosition = CalculateMapPositionByLayoutPosition(Size / 2, Size / 2);
 
-            SpawnerElement spawner = new SpawnerElement(spawnerPosition);
+            Spawner spawner = new Spawner(spawnerPosition);
             SectionLayout[Size / 2, Size / 2] = spawner;
         }
 
         private void GenerateChestLayout()
         {
-            SectionLayout[Size / 2, Size / 2] = new ChestElement();
+            SectionLayout[Size / 2, Size / 2] = new Chest();
         }
 
         private void GenerateBossStartLayout()
@@ -389,7 +389,7 @@ namespace MapSystems
         {
             for (int i = 0; i < Size; i++)
             {
-                SectionLayout[Size - 1, i] = GateElement.Instance;
+                SectionLayout[Size - 1, i] = Gate.Instance;
             }
         }
 
@@ -411,14 +411,14 @@ namespace MapSystems
             switch (Type)
             {
                 case SectionType.ShipLeft:
-                    SectionLayout[1, 3] = ShipSegmentElement.Instance;
-                    SectionLayout[1, 4] = ShipSegmentElement.Instance;
-                    SectionLayout[3, 3] = ShipSegmentElement.Instance;
-                    SectionLayout[3, 4] = ShipSegmentElement.Instance;
+                    SectionLayout[1, 3] = ShipSegment.Instance;
+                    SectionLayout[1, 4] = ShipSegment.Instance;
+                    SectionLayout[3, 3] = ShipSegment.Instance;
+                    SectionLayout[3, 4] = ShipSegment.Instance;
 
                     for (int i = 0; i < Size; i++)
                     {
-                        SectionLayout[2, i] = ShipSegmentElement.Instance;
+                        SectionLayout[2, i] = ShipSegment.Instance;
                     }
                     break;
 
@@ -429,7 +429,7 @@ namespace MapSystems
                         {
                             if (j == 0 && (i == 0 || i == Size - 1)) continue;
 
-                            SectionLayout[i, j] = ShipSegmentElement.Instance;
+                            SectionLayout[i, j] = ShipSegment.Instance;
                         }
                     }
                     break;
@@ -439,10 +439,10 @@ namespace MapSystems
                     {
                         for (int j = 0; j <= 2; j++)
                         {
-                            SectionLayout[i, j] = ShipSegmentElement.Instance;
+                            SectionLayout[i, j] = ShipSegment.Instance;
                         }
                     }
-                    SectionLayout[2, 3] = ShipSegmentElement.Instance;
+                    SectionLayout[2, 3] = ShipSegment.Instance;
 
                     break;
             }
@@ -537,11 +537,11 @@ namespace MapSystems
 
             if (chosenTrap == 1)
             {
-                SectionLayout[Size / 2, Size / 2] = new DamageTrapElement();
+                SectionLayout[Size / 2, Size / 2] = new DamageTrap();
             }
             else
             {
-                SectionLayout[Size / 2, Size / 2] = new QuicksandTrapElement();
+                SectionLayout[Size / 2, Size / 2] = new QuicksandTrap();
             }
             
         }
@@ -549,7 +549,7 @@ namespace MapSystems
         private void GenerateDoors()
         {
             List<Direction> directions = [Direction.Up, Direction.Down, Direction.Left, Direction.Right];
-            DoorElement door = new DoorElement();
+            Door door = new Door();
             foreach (Direction direction in directions)
             {
                 switch (direction)

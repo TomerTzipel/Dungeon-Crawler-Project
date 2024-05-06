@@ -9,9 +9,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Puzzles\BreakingFloor\**" />
-    <EmbeddedResource Remove="Puzzles\BreakingFloor\**" />
-    <None Remove="Puzzles\BreakingFloor\**" />
+    <Compile Remove="PuzzlesSystem\Puzzles\BreakingFloor\**" />
+    <EmbeddedResource Remove="PuzzlesSystem\Puzzles\BreakingFloor\**" />
+    <None Remove="PuzzlesSystem\Puzzles\BreakingFloor\**" />
   </ItemGroup>
 
 </Project>

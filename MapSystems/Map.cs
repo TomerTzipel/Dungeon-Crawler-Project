@@ -1,13 +1,8 @@
 ﻿
-
-
-
-
-using GameSystems;
 using System.Diagnostics;
-using System.Numerics;
 
-namespace MapSystems
+
+namespace MapSystem
 {
     public class Map
     {
@@ -20,7 +15,7 @@ namespace MapSystems
 
         protected Map() { }
 
-        public Map(int numberOfSectionsToGenerate, int matrixSectionSize, MapComposition mapComposition, PlayerElement player)
+        public Map(int numberOfSectionsToGenerate, int matrixSectionSize, MapComposition mapComposition, Player player)
         {
             GenerateSections(numberOfSectionsToGenerate, matrixSectionSize, mapComposition);
             Size = matrixSectionSize * Section.Size;
@@ -91,7 +86,7 @@ namespace MapSystems
             SectionsMatrix.GenerateSectionsLayout(mapComposition);
         }
 
-        protected void LocalizePlayer(PlayerElement player)
+        protected void LocalizePlayer(Player player)
         {
             int sectionSize = Section.Size;
             Point startPosition = new Point(SectionsMatrix.StartSectionPosition.X * sectionSize, SectionsMatrix.StartSectionPosition.Y * sectionSize);
@@ -236,7 +231,7 @@ namespace MapSystems
 
         private void CheckMovingElementStateShift(MovingElement element, Direction direction)
         {
-            if (element is PlayerElement player) 
+            if (element is Player player) 
             {
                 player.ChangeDirection(direction);
                 return;

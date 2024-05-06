@@ -1,9 +1,13 @@
 ﻿
 using System.Diagnostics;
 
-
 namespace Utility
 {
+    public interface ITickable
+    {
+        public bool Tick(Map map, float interval);
+    }
+
     public abstract class Ticker
     {
         protected readonly object _tickerLock = new object();

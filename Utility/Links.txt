@@ -1,7 +1,0 @@
-﻿
-1. Using lists asynchronously:
-	
-	Got an error for removing from a list while in a foreach loop, so I looked at ways to use lists asynchronously.
-	https://stackoverflow.com/questions/10017796/modifying-list-from-another-thread-while-iterating-c
-	Used Method 1 in Map.
-	Used Method 3 in SpawnerManager, EnemyManager.

@@ -1,6 +1,6 @@
 ﻿
 
-namespace MapSystems
+namespace MapSystem
 {
     public class MiniMap
     {

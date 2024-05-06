@@ -1,8 +1,6 @@
 ﻿
 
-using System;
-
-namespace GameSystems
+namespace GameSystem
 {
     public enum AudioType
     {

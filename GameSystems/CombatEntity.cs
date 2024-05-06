@@ -1,10 +1,6 @@
 ﻿
 
-using System;
-using System.Diagnostics;
-using static System.Net.Mime.MediaTypeNames;
-
-namespace GameSystems
+namespace GameSystem
 {
 
     public enum AttackResult

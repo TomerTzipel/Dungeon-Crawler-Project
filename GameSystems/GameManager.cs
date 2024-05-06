@@ -1,9 +1,5 @@
 ﻿
-
-using System.Diagnostics;
-using System.Xml.Linq;
-
-namespace GameSystems
+namespace GameSystem
 {
     public static class GameManager
     {

@@ -1,5 +1,5 @@
 ﻿
-namespace MapSystems
+namespace MapSystem
 {
     public class MapComposition
     {
