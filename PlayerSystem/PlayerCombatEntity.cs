@@ -115,13 +115,15 @@ namespace PlayerSystem
 
         public void PrintPlayerStatus()
         {
+            Console.ForegroundColor = ConsoleColor.Magenta;
             Console.WriteLine($"Level:{LevelManager.CurrentLevelNumber}");
-
+            Console.ForegroundColor = ConsoleColor.DarkRed;
             Console.Write($"HP:{_hp:0000}/{_maxHp:0000}");
 
             PrintHpBar();
-
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.WriteLine($"Gold:{Inventory.Gold}");
+            Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine($"Keys:{Inventory.Keys}");
             Console.WriteLine($"Potions:{Inventory.Potions}");
             DoesHUDNeedReprint = false;
